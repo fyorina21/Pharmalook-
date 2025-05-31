@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom,#E5FFD7 , #B7CCAB, #899981);
+    
     min-height: 100vh;
     margin: 0;
     display: flex;
@@ -49,6 +49,22 @@ footer {
   
   
 }
+/* .spacer-box {
+  height: 150px;           
+  width: 80%;              
+  background-color: rgb(229, 255, 215);  
+  margin-right: 100px;       
+  border-radius: 10px;     
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  border-radius: 50px 50px 50px 50px;
+  z-index: 100;
+  position: relative;
+  top: -90px;
+  width: 1000px; */
+
+  
+/* } */
+
 
 .well{
   margin-top: 200px;
@@ -156,6 +172,7 @@ body{
 h1{
     color: black;
     margin-left: 10px;
+    font-size: 32px;
 }
 
 p{
@@ -179,137 +196,14 @@ p{
 }
 .img1{
 margin-top: 20px;
+
 }
 
  body {
       font-family: Arial, sans-serif;
-      background-color: #E5FFD7;
+      
       margin: 0;
       padding: 40px 0;
     }
 
-    .features-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    nav.features-header {
-      background-color: #E5FFD7;
-      padding: 10px 60px;
-      border-radius: 50px;
-      text-align: center;
-      margin-bottom: 50px;
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-      margin-left: auto;
-      margin-right: auto;
-      width:200px;
-    }
-
-    .features-header h2 {
-      font-size: 1.8rem;
-      margin: 0;
-      color: #000000;
-    }
-
-    .features-section {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-    }
-
-    .feature-box {
-      background-color: #F2FFEC;
-      padding: 60px 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .box-5 {
-      grid-column: 1 / span 2;
-      max-width: 60%;
-      justify-self: center;
-    }
-
-    @media (max-width: 800px) {
-      .features-section {
-        grid-template-columns: 1fr;
-      }
-
-      .box-5 {
-        grid-column: auto;
-        max-width: 100%;
-        justify-self: stretch;
-      }
-    }
-
-.cta{
-
-}
-
-.faq{
-
-}
-
-.footer-content {
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 50px;
-}
-
-.footer-content a {
-    color: black;
-    text-decoration: none;
-}
-
-.footer-content a:hover {
-    text-decoration: underline;
-}
-
-.socials, .contact-info, .address {
-    display: flex;
-    flex-direction: column;
-    max-width: 45%;
-    gap: 10px;
-}
-
-.socials ul {
-    list-style: none;
-    padding: 0;
-}
-
-.socials li {
-    margin-bottom: 5px;
-}
-
-.socials a {
-    display: inline-block;
-    padding: 2px 5px;
-    border: 1px solid white;
-    border-radius: 5px;
-}
-
-.socials a:hover {
-    background-color: white;
-    color: #333;
-}
-
-.pharma-logo {
-    width: 200px;
-    height: auto;
-    margin-right: auto;
-}
-
-#contact-info {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
+    
