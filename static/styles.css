@@ -95,33 +95,33 @@ body {
   cursor: pointer;
 }
 .cta{
-    margin: 100px  auto auto auto;
-    padding: 80px 80px 60px 80px;
-    border: 1px solid #04450C;
-    border-radius: 40px;
+    margin: 150px  auto 50px auto;
+    padding: 100px 80px 30px 80px;
+    border: 0.5px solid #04450C;
+    border-radius: 35px;
     font-size: 30px;
     color: #353734;
-    max-width: 110vh;
+    max-width: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     background-color: #09BD0012;
 }
 
 .cta p {
-    flex: 1 1 200px;
+    flex: 1 1 100px;
     margin: 0;
-    font-size: 45px;
+    font-size: 40px;
     text-align: center;
 }
 
 .gt-button {
-    padding: 22px 35px;
-    font-size: 24px;
+    padding: 10px 40px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 10px;
     text-align: center;
     transition: background-color 0.3s ease;
     user-select: none;
@@ -129,11 +129,12 @@ body {
     color: #04450C;
     font-weight: 600;
     font-family: "Alkalami", serif;
-    background: #F0FFF0;
+    background: #F2FFEC;
 }
 
 .gt-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #F0FFF0; /* Darker green on hover */
+  transform: translateY(-5px);
 }
 
 .gt-button:active {
@@ -145,7 +146,7 @@ body {
 .faq h1 {
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 45px;
+    font-size: 35px;
 }
 
 .faq {
@@ -209,7 +210,8 @@ body {
 
 .outro p {
     font-size: 25px;
-    max-width: 85vh;
+    font-weight: 600;
+    max-width: 90vh;
 }
 
 .footer-container {
@@ -247,12 +249,12 @@ body {
     flex-wrap: wrap;
 }
 
-.footer-heading  {
+/*.footer-heading  {
     font-size: 20px;
     font-weight: bold;
     margin-left: 70px;
     margin-bottom: 15px;
-}
+}*/
 
 .contact-info a {
     text-decoration: none;
