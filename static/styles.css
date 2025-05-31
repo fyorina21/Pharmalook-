@@ -47,7 +47,8 @@ footer {
       box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
       margin-left: auto;
       margin-right: auto;
-      width:200px;
+      width: 250px;
+      height: 20px;
     }
 
     .features-header h2 {
