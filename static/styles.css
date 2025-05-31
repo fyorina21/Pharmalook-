@@ -1,0 +1,279 @@
+body {
+    background: linear-gradient(to bottom,#E5FFD7 , #B7CCAB, #899981);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    width: 100%;
+    gap: 50px;
+}
+
+
+.welcome{
+  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+
+}
+.navbar {
+  background-color: white;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 100px;
+  
+}
+
+.logo span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #2e8b57;
+}
+
+.buttons .nav-btn {
+  margin-left: 20px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid #2e8b57;
+  background-color: #d9fdd3;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttons .nav-btn:hover {
+  background-color: #b6f5ac;
+}
+.hero {
+  background-image: url('hero-background.jpg'); /* Replace with your real image path */
+  background-size: cover;
+  background-position: center;
+  padding: 100px 30px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.search-btn {
+  padding: 15px 30px;
+  background-color: #d9fdd3;
+  color: #004d00;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #b6f5ac;
+}
+
+
+
+
+
+
+
+body{
+    background-color: rgb(229, 255, 215);
+}
+h1{
+    color: black;
+    margin-left: 10px;
+}
+
+p{
+    font-size: 18px;
+  line-height: 1.2;
+  margin-left: 3px;
+  
+}
+#logos{
+     max-width: 700px;
+  margin: 50px auto;
+  text-align: center;
+  
+}
+#photo{
+  display:inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  
+}
+.img1{
+margin-top: 20px;
+}
+
+ body {
+      font-family: Arial, sans-serif;
+      background-color: #E5FFD7;
+      margin: 0;
+      padding: 40px 0;
+    }
+
+    .features-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    nav.features-header {
+      background-color: #E5FFD7;
+      padding: 10px 60px;
+      border-radius: 50px;
+      text-align: center;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      margin-left: auto;
+      margin-right: auto;
+      width:200px;
+    }
+
+    .features-header h2 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: #000000;
+    }
+
+    .features-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .feature-box {
+      background-color: #F2FFEC;
+      padding: 60px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .box-5 {
+      grid-column: 1 / span 2;
+      max-width: 60%;
+      justify-self: center;
+    }
+
+    @media (max-width: 800px) {
+      .features-section {
+        grid-template-columns: 1fr;
+      }
+
+      .box-5 {
+        grid-column: auto;
+        max-width: 100%;
+        justify-self: stretch;
+      }
+    }
+
+.cta{
+
+}
+
+.faq{
+
+}
+
+.footer-content {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 50px;
+}
+
+.footer-content a {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.socials, .contact-info, .address {
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    gap: 10px;
+}
+
+.socials ul {
+    list-style: none;
+    padding: 0;
+}
+
+.socials li {
+    margin-bottom: 5px;
+}
+
+.socials a {
+    display: inline-block;
+    padding: 2px 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.socials a:hover {
+    background-color: white;
+    color: #333;
+}
+
+.pharma-logo {
+    width: 200px;
+    height: auto;
+    margin-right: auto;
+}
+
+#contact-info {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
