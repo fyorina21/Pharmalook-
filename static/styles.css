@@ -1,21 +1,15 @@
 body {
-    background: linear-gradient(to bottom,#E5FFD7 , #B7CCAB, #899981);
+    background: linear-gradient(to bottom,#E5FFD7 , #E5FFD7, #899981);
     min-height: 100vh;
     margin: 0;
     display: flex;
     flex-direction: column;
 }
 
-footer {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    width: 100%;
-    gap: 50px;
+.alkalami-regular {
+  font-family: "Alkalami", serif;
+  font-style: normal;
 }
-
 
 .welcome{
 
@@ -30,41 +24,178 @@ footer {
 }
 
 .cta{
-
-}
-
-.faq{
-
-}
-
-.footer-content {
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 50px;
-}
-
-.footer-content a {
-    color: black;
-    text-decoration: none;
-}
-
-.footer-content a:hover {
-    text-decoration: underline;
-}
-
-.socials, .contact-info, .address {
+    margin: 100px  auto auto auto;
+    padding: 80px 80px 60px 80px;
+    border: 1px solid #04450C;
+    border-radius: 40px;
+    font-size: 30px;
+    color: #353734;
+    max-width: 110vh;
     display: flex;
     flex-direction: column;
-    max-width: 45%;
-    gap: 10px;
+    align-items: center;
+    gap: 20px;
+    background-color: #09BD0012;
+}
+
+.cta p {
+    flex: 1 1 200px;
+    margin: 0;
+    font-size: 45px;
+    text-align: center;
+}
+
+.gt-button {
+    padding: 22px 35px;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    color: #04450C;
+    font-weight: 600;
+    font-family: "Alkalami", serif;
+    background: #F0FFF0;
+}
+
+.gt-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.gt-button:active {
+  background-color: #3e8e41; /* Even darker on click */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+.faq h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 45px;
+}
+
+.faq {
+    margin: 200px auto 0 auto;
+    text-align: left;
+    padding: 0 4rem;
+}
+    
+
+.faq-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    overflow: hidden;
+    min-width: 1000px;
+    font-size: 25px;
+}   
+
+.faq-question {
+    padding: 1rem ;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.faq-question:hover {
+    color: grey;
+}
+
+.faq-answer {
+    padding: 0 1rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+    background: transparent;
+}
+
+.faq-answer.open {
+    padding: 1rem;
+    max-height: 500px;
+    opacity: 1;
+}
+
+.faq-icon {
+    transition: transform 0.3s;
+}
+
+.outro {
+    margin: 100px auto 150px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.outro p {
+    font-size: 25px;
+    max-width: 85vh;
+}
+
+.footer-container {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 100%;
+    gap: 20px;
+}
+
+.footer-right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 3;
+    margin-left: 200px;
+}
+
+.footer-details {
+    display: flex;
+    justify-content: flex-start;
+    gap: 100px;
+}
+
+.address, .contact-info {
+    max-width:200px;
+}
+
+.pharma-logo {
+    width: 200px;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.footer-heading  {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 70px;
+    margin-bottom: 15px;
+}
+
+.contact-info a {
+    text-decoration: none;
+    color: #000;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
 }
 
 .socials ul {
     list-style: none;
-    padding: 0;
+    padding: 0;    
+
 }
 
 .socials li {
@@ -76,6 +207,8 @@ footer {
     padding: 2px 5px;
     border: 1px solid white;
     border-radius: 5px;
+    color: black;
+    text-decoration: none;
 }
 
 .socials a:hover {
@@ -83,14 +216,12 @@ footer {
     color: #333;
 }
 
-.pharma-logo {
-    width: 200px;
-    height: auto;
-    margin-right: auto;
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 100px;
+    margin-bottom: 25px;
 }
 
-#contact-info {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
