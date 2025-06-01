@@ -14,27 +14,26 @@
             <h2>Login</h2>
             <p class="login-text">Welcome back! Please login to your account.</p>
             
-             <div class="social-login">
-             <label for="email">Email/Phone</label> 
-             <input type="text" id="email">
-            <div class="password-container">
+             <div id="login-error" class="error-message"></div>
+      <form id="login-form">
+        
+               <label for="email">Email/Phone</label> 
+             <input type="email" id="email" name="email" required>
+            
              <div class="password-section">
                   <label for="password">Password</label>
                   <a href="#" class="forgot-password">Forgot your Password?</a>
              </div>
-             <input type="password" id="password">
+             <input type="password" id="password" name="password" required>
             
              <div class="remember-me">
-                <input type="checkbox" id="remember-me">
+                <input type="checkbox" id="remember-me" name="rememberMe">
                 <label for="remember-me">Remember me</label>
-                
-            </div>
-            <button class="login-btn">Login</button>
-            <p class="signup-text">Don't have an account?<a href="#">Sign up</a></p>	
-
-          
-      </form>
-    </div>
+                 </div>
+            <button type="submit" class="login-btn">Login</button>
+                </form>
+            <p class="signup-text">Don't have an account?<a href="signup.html">Sign up</a></p>	
+  </div>
   </div>
 
   <!-- Password Recovery Form (Hidden by default) -->
@@ -43,18 +42,13 @@
       <h2>Reset Password</h2>
       <p class="login-text">Enter your email to receive a reset link</p>
       
-      <form>
+      <form id="recoveryForm">
         <label for="recovery-email">Email</label>
         <input type="email" id="recovery-email" required>
-        
-        <button type="button" class="recovery-btn">Send Reset Link</button>
-        <p class="back-to-login">Remember your password? <a href="#" class="show-login">Login</a></p>
-           </form>
+      </form>
+      <p class="back-to-login">Remember your password? <a href="#" class="show-login">Login</a></p>
           </div>
         </div> 
-    </div>
-  </div>
-  <script src="script.js"></script>
 </body>
 </html>
 

@@ -1,22 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const loginBtn = document.querySelector(".login-btn");
+    const loginForm = document.getElementById("loginForm");
     const forgotPasswordLink = document.querySelector(".forgot-password");
     const backToLoginLink = document.querySelector(".show-login");
     const loginContainer = document.querySelector(".login-container");
     const recoveryForm = document.querySelector(".password-recovery-form");
     const recoveryBtn = document.querySelector(".recovery-btn");
-
+    const loginError = document.getElementById("login-error");
     // Login functionality
-    loginBtn.addEventListener("click", function() {
+    loginForm.addEventListener("submit", function(e) {
+        e.preventDefault(); 
+
         let email = document.getElementById("email").value.trim();
         let password = document.getElementById("password").value.trim();
         let rememberMe = document.getElementById("remember-me").checked;
         if (!email || !password) {
-            alert("Please fill in both fields!");
-            return;
+          loginError.textContent = "Please fill in both filds!"
+          loginError.style.display = "block";
+          return;
         }
-
-        // Send login request to backend
+        loginError.style.display = "none";
+        
         loginBtn.textContent = "Logging in...";
         loginBtn.disabled = true;
 
@@ -25,28 +28,36 @@ document.addEventListener("DOMContentLoaded", function() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password, rememberMe })
         })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok){
+            return response.json().then(err => {throw err;});
+          }
+          return response.json();
+        })
         .then(data => {
             loginBtn.textContent = "Login";
             loginBtn.disabled = false;
-             if (data.redirect) {
-                window.location.href = data.redirect; // Redirect to signup if user not found
+             if (data.error) {
+                loginError.textContent = data.error;
+                loginError.style.display = "block";
             } else if (data.success) {
                 if (rememberMe) {
-                    localStorage.setItem("token", data.token); // Persist token
-                } else {
-                    sessionStorage.setItem("token", data.token); // Session-only token
+                    localStorage.setItem("token", data.token); 
+                    sessionStorage.setItem("token", data.token); 
                 }
-                window.location.href = "dashboard.html"; // Redirect on success
+                if (data.role === "admin"){
+                    window.location.href = "admin-dashboard.html"; 
             } else {
-                alert(data.error);
+               window.location.href = "pharmacist-dashboard.html":
             }
+          }
         })
         .catch(error => {
             loginBtn.textContent = "Login";
             loginBtn.disabled = false;
-            console.error("Error:", error);
-            alert("Something went wrong. Please try again.");
+            loginError.textContent = error.error || "Login failed.Please try again"
+            loginError.style.display = "block";
+            console
         });
     });
 
@@ -81,17 +92,25 @@ document.addEventListener("DOMContentLoaded", function() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: recoveryEmail })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to send reset link");
+            }
+            return response.json();
+        })
         .then(data => {
             recoveryBtn.textContent = "Send Reset Link";
             recoveryBtn.disabled = false;
-            alert(data.message);
+            alert("If an account exists with this email, a reset link has been sent");
+            recoveryForm.style.display = "none";
+            loginContainer.style.display = "block";
         })
         .catch(error => {
             recoveryBtn.textContent = "Send Reset Link";
             recoveryBtn.disabled = false;
+            alert("Could not send reset link. Please try again.");
             console.error("Error:", error);
-            alert("Could not send reset link. Try again.");
         });
+      });
     });
 
