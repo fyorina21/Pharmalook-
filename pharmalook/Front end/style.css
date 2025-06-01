@@ -110,6 +110,7 @@ input:focus {
     width: auto;
     margin: 0 10px 0 0;
     accent-color: #56de56;
+    cursor: pointer;
 }
 
 .login-btn,
@@ -142,14 +143,14 @@ input:focus {
     cursor: not-allowed;
 }
 
-.singup-text,
+.signup-text,
 .back-to-login {
     margin-top: 20px;
     font-size: 14px;
     color: #555;
 }
 
-.singup-text a,
+.signup-text a,
 .back-to-login a {
     color: #1266ba;
     text-decoration: none;
