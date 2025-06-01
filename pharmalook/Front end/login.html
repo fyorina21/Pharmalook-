@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http -equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaLook Login</title>
+    <link rel="stylesheet" href="style.css">	
+</head> 
+<body>
+   <img src="logo.png" class="logo" alt="PharmaLook Logo">
+  <div class="login-container">
+  <div class="login-box">
+            <h2>Login</h2>
+            <p class="login-text">Welcome back! Please login to your account.</p>
+            
+             <div class="social-login">
+             <label for="email">Email/Phone</label> 
+             <input type="text" id="email">
+            <div class="password-container">
+             <div class="password-section">
+                  <label for="password">Password</label>
+                  <a href="#" class="forgot-password">Forgot your Password?</a>
+             </div>
+             <input type="password" id="password">
+            
+             <div class="remember-me">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+                
+            </div>
+            <button class="login-btn">Login</button>
+            <p class="signup-text">Don't have an account?<a href="#">Sign up</a></p>	
+
+          
+      </form>
+    </div>
+  </div>
+
+  <!-- Password Recovery Form (Hidden by default) -->
+  <div class="password-recovery-form" style="display: none;">
+    <div class="login-box">
+      <h2>Reset Password</h2>
+      <p class="login-text">Enter your email to receive a reset link</p>
+      
+      <form>
+        <label for="recovery-email">Email</label>
+        <input type="email" id="recovery-email" required>
+        
+        <button type="button" class="recovery-btn">Send Reset Link</button>
+        <p class="back-to-login">Remember your password? <a href="#" class="show-login">Login</a></p>
+           </form>
+          </div>
+        </div> 
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
