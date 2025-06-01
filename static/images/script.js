@@ -24,3 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.getElementById("loginBtn").onclick = function () {
+    location.href = "pharmalook/Front%20end/login.html";
+};

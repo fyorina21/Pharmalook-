@@ -172,7 +172,7 @@ input:focus {
     text-align: left;
     border-left: 4px solid #d32f2f;
 }
-select {
+.select {
     width: 100%;
     padding: 12px;
     margin: 5px 0 15px;
