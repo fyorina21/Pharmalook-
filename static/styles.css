@@ -11,14 +11,6 @@ body {
   font-style: normal;
 }
 
-.welcome{
-
-}
-
-.logos{
-
-}
-
  .body {
       font-family:  sans-serif;
       background-color: #E5FFD7;
@@ -87,7 +79,7 @@ body {
       }
     }
 
-       .feature-box:hover {
+.feature-box:hover {
   box-shadow: 0px 0px 0px rgb(192, 255, 193);
   transform: translateY(-5px);
   background-color: #e0ffd4;
@@ -499,4 +491,3 @@ margin-top: 20px;
       padding: 40px 0;*/
     }
 
-    
