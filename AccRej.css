@@ -1,0 +1,116 @@
+p{
+  font-style: arial;
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.backG{
+  padding-top: 2%;
+  display:flex ;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.nav_acc_rej{
+  background-color: white;
+  height: 5vh;
+  width: 98%;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid  rgb(215, 255, 213);
+  box-shadow:0px 0px 10px  rgb(215, 255, 213); 
+  position:relative;
+  display:flex ;
+  align-items: center;
+  justify-content: center;
+}
+.nav_acc_rej img{
+  height: 100px;
+}
+
+.new-pharmabox{
+      text-align: center;
+      width: 200px;
+      height: 30px;
+      background-color: #ffffff;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin: 50px auto 0;
+      font-size: 18px;
+      color: #000
+}
+
+.viewer{
+  margin: 30px auto 0;
+  width: 90%;
+  height: auto;
+  background-color: #c9fbc5;
+  box-shadow:0px 0px 10px  rgb(233, 233, 233); 
+  border-radius: 10px;
+   padding: 20px;
+   
+}
+
+
+.pharmacy-request {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;  
+  margin-left: 20px;
+  margin-right: 20px;
+  font-family: sans-serif;
+  text-align: center;
+  height: auto;
+}
+
+
+
+.actions {
+  margin-top: 20px;
+}
+
+.accept-btn, .reject-btn {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.accept-btn:hover, .reject-btn:hover{
+    box-shadow:0px 0px 10px  rgb(196, 208, 195); 
+    transition: 0.3s;
+}
+
+.accept-btn:active{
+background-color: #c9fbc5;
+} 
+
+.reject-btn:active{
+background-color: #fb8686;
+}
+
+.accept-btn {
+  background-color: rgb(147, 253, 161);
+  color: black;
+}
+
+.reject-btn {
+  background-color: #FF3C3C;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
