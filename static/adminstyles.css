@@ -113,5 +113,18 @@ td:last-child, th:last-child {
 }
 
 .nav-icons i:hover {
-  color: #2e7d32; /* Darker green on hover */
+  color: #2e7d32; 
+}
+
+.icon-link {
+  text-decoration: none;    
+  color: inherit;          
+}
+
+.icon-link:visited,
+.icon-link:hover,
+.icon-link:focus,
+.icon-link:active {
+  text-decoration: none;
+  color: inherit;
 }

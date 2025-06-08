@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loginBtn.textContent = "Logging in...";
         loginBtn.disabled = true;
 
-        fetch("http://localhost:5000/api/login", {
+        fetch("http://localhost:5000/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password, rememberMe })
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
           return response.json();
         })
         .then(data => {
+            console.log("Received response:", data);
             loginBtn.textContent = "Login";
             loginBtn.disabled = false;
              if (data.error) {
@@ -48,20 +49,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     sessionStorage.setItem("token", data.token); 
                 }
                 if (data.role === "admin"){
-                    window.location.href = "admin-dashboard.html"; 
-            } else {
-               window.location.href = "pharmacist-dashboard.html";
+                    window.location.href = "/admin-dashboard"; 
+                } else {
+                    window.location.href = "pharmacist-dashboard.html";
+                }
             }
-          }
-        })
-        .catch(error => {
-            loginBtn.textContent = "Login";
-            loginBtn.disabled = false;
-            loginError.textContent = error.error || "Login failed.Please try again"
-            loginError.style.display = "block";
-            console
+            })
+            .catch(error => {
+                loginBtn.textContent = "Login";
+                loginBtn.disabled = false;
+                loginError.textContent = error.error || "Login failed.Please try again"
+                loginError.style.display = "block";
+                console
+            });
         });
-    });
 
     // Forgot password toggle
     forgotPasswordLink.addEventListener("click", function(e) {
