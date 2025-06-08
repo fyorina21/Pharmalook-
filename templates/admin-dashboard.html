@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" width="width=device-width" content="initial-scale=1.0">
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='adminstyles.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    </head>
+    <body class="admin-body">
+      
+        <div class="navbar">
+        <img src="pharmalook\Front end\logo.png" class="logo">
+        <div class="nav-icons">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-clock"></i>
+        </div>
+      </div>
+
+      
+      <div class="admin-container">
+        <h1 id="admin-heading">Registered Pharmacies</h1>
+        
+        <div class="pharmacy-table">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pharmacy</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            {% if pharmacies %}
+                <tbody>
+                    {% for pharmacy in pharmacies %}
+                    <tr>
+                        <td>{{ pharmacy.name }}</td>
+                        <td class="remove-btn">Remove</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="2">No registered pharmacies found.</td>
+                    </tr>
+                </tbody>
+            {% endif %}
+            </table>
+        
+        </div> 
+      </div> 
+    </body>
+</html>

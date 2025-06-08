@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PharmaLook - Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}" />
+</head>
+<body>
+<img src="static/images/photo_2025-03-31_17-08-08-removebg-preview.png" alt="PharmaLook Logo" class="logo" />
+
+  <div class="container">
+    <form class="signup-form">
+      <h2>Sign Up</h2>
+      <p>Enter your information to create an account</p>
+
+      <div class="name-fields">
+        <div class="field">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+        <div class="field">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+      </div>
+      <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="field">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required />
+      </div>
+
+      <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      </div>
+      
+      <div class="field">
+      <label for="confirmPassword">Confirm password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required />
+      </div>
+
+      <button type="submit">Sign Up</button>
+
+      <p class="signin-link">Already have an account? <a href="pharmalook/Front%20end/login.html">Sign in</a></p>
+    </form>
+    
+  </div>
+</body>
+</html>
