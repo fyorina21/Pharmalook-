@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4fff4;
+}
+
+/* .header-bar {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+} */
+
+.logo {
+    height: 200px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+
+
+.form-section,
+.remove-section {
+    background-color: #eaffea;
+    border-radius: 8px;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-btn {
+    width: 100%;
+    background-color: #aaffaa;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.medicine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.medicine-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fefefe;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.medicine-details {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-left: 4px solid #4caf50;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+.remove-medicine {
+    width: 80%;
+    display: inline-block;
+     background-color: #eaffea;
+    border-radius: 8px;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.remove-medicine button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+nav {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8; /* Adjust as needed */
+    padding: 0px 0px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 100px;
+}
+
+.logo img {
+    height: 200px; /* Adjust size based on your design */
+}
