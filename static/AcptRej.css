@@ -82,17 +82,22 @@ p{
   cursor: pointer;
 }
 
-.accept-btn:hover, .reject-btn:hover{
-    box-shadow:0px 0px 10px  rgb(196, 208, 195); 
+.accept-btn:hover{
+    background-color: #c9fbc5; 
+    transition: 0.3s;
+} 
+
+.reject-btn:hover{
+    background-color: #f76a6a;
     transition: 0.3s;
 }
 
 .accept-btn:active{
-background-color: #c9fbc5;
+background-color: #eefaee;
 } 
 
 .reject-btn:active{
-background-color: #fb8686;
+background-color: #f7b9b9;
 }
 
 .accept-btn {
