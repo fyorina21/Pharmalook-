@@ -195,6 +195,10 @@ def pharmacies():
     pharmacies = cursor.fetchall()
     return render_template("admin-dashboard.html", pharmacies=pharmacies)
 
+@app.route('/psignup')
+def pharmacistprofile():
+    return render_template('psignup.html')
+
 
 @app.route('/accRej')
 def accept_reject():
