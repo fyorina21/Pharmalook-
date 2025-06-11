@@ -1,0 +1,58 @@
+body {
+    background-color: white;
+}
+
+.navbar {
+    background-color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 150px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.center-container {
+  width: 90%;
+  max-width: 800px;
+  background-color: #E5FFD7;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px
+}
+
+.user-btn {
+    border-radius: 50px;
+    background-color: white;
+    padding: 10px;
+}
+
+.pharmacist-btn {
+    border-radius: 50px;
+    background-color: white;
+    padding: 10px;
+}
+
+p {
+    margin-top: 15px;
+    text-align: center;
+}
+
+p a {
+    text-decoration: underline;
+    color: #333;
+}
+
+p a :hover {
+    color: darkgreen;
+}
