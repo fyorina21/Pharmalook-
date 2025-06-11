@@ -34,6 +34,11 @@ def get_db_connection():
 def landing():
     return render_template("index.html")
 
+
+@app.route('/who_are_you')
+def who_are_you():
+    return render_template("who_are_you.html")
+
 # Signup Route
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
