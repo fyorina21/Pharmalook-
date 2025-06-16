@@ -5,7 +5,7 @@ routes_bp = Blueprint("routes_bp", __name__)
 
 @routes_bp.route('/profile')
 def profile():
-    return render_template('profile.html')
+    return render_template('pprofile.html')
 
 @routes_bp.route("/")
 def home():
