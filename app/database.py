@@ -30,6 +30,7 @@ class Pharmacist(db.Model):
     location = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    admin_approved = db.Column(db.Boolean, default=False, nullable=False)
     
     
     def set_password(self, password):

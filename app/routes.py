@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template, request
-from .database import Pharmacist
+from .database import Pharmacist, db
 routes_bp = Blueprint("routes_bp", __name__)
 
 
@@ -31,3 +31,24 @@ def medicine():
 def search():
     result=""
     return render_template("search.html",result=result)
+
+@routes_bp.route('/accRej')
+def accept_reject():
+    return render_template("accRej.html")
+
+
+
+@routes_bp.route('/who_are_you')
+def who_are_you():
+    return render_template("who_are_you.html")
+
+
+@routes_bp.route('/admin-dashboard')
+def pharmacies():
+    # Query all pharmacists where is_accepted is True
+    pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
+    
+    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+
+
+
