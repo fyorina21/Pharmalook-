@@ -11,6 +11,11 @@ def profile():
 def home():
     return render_template('index.html')
 
+@routes_bp.route("/whoareyou")
+def identity():
+    return render_template('who_are_you.html')
+
+
 
 @routes_bp.route('/medicine')
 def medicine():
