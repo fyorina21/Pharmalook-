@@ -8,6 +8,19 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
+        ADMIN_EMAIL = "admin@example.com"
+        ADMIN_PASSWORD = "admin123"
+
+        # Check if login is for admin
+        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+            session['id'] = 0  # Optional: distinguish admin with ID 0
+            session['username'] = "Admin"
+            session['is_admin'] = True
+
+            print("Admin logged in successfully")
+            return redirect(url_for("routes_bp.pharmacies"))
+
+
         user = Users.query.filter_by(email=email).first()
 
         if not user:
