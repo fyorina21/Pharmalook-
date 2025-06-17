@@ -14,9 +14,11 @@
     <div class="center-container">
         <h1>Who are you?</h1>
 
-        <a href="{{ url_for('signup') }}"><button class="user-btn">I'm a User</button></a>
-        <a href="{{ url_for('psignup') }}"><button class="pharmacist-btn">I'm a Pharmacist</button></a>
-
+        <div class="buttons">
+            <a href="{{ url_for('signup') }}"><button class="user-btn">I'm a User</button></a>
+            <a href="{{ url_for('psignup') }}"><button class="pharmacist-btn">I'm a Pharmacist</button></a>
+        </div>
+            
 
         <p>Already have an account?<a href="{{ url_for('login')}}">Sign in</a></p>
     </div>
