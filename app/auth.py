@@ -1,5 +1,7 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
 from .database import Users,db
+from app.database import Medicine
+
 auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -58,3 +60,33 @@ def signup():
 def logout():
     session.clear()
     return redirect(url_for('routes_bp.home')) 
+
+
+
+@auth_bp.route("/add-medicine", methods=["POST"])
+def add_medicine():
+    if request.method == "POST":
+        name = request.form.get("Medicinename")
+        price = request.form.get("price")
+        dosage = request.form.get("Dosage")
+        description = request.form.get("medicinedescription")
+
+        if not name or not price or not dosage or not description:
+            flash("All fields are required", "error")
+            return redirect(url_for("routes_bp.home"))  # adjust as needed
+
+        try:
+            new_medicine = Medicine(
+                Medicinename=name,
+                price=float(price),
+                Dosage=dosage,
+                medicinedescription=description
+            )
+            db.session.add(new_medicine)
+            db.session.commit()
+            flash("Medicine added successfully", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error: {e}", "error")
+
+        return redirect(url_for("pdahboard.home"))  # or wherever you want to go
