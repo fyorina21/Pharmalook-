@@ -4,29 +4,29 @@ from .database import Pharmacist, db, Medicine
 
 routes_bp = Blueprint("routes_bp", __name__)
 
-@routes_bp.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        name = request.form.get('firstName')
-        location = request.form.get('Location')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        confirm = request.form.get('confirmPassword')
+# @routes_bp.route('/signup', methods=['GET', 'POST'])
+# def signup():
+#     if request.method == 'POST':
+#         name = request.form.get('firstName')
+#         location = request.form.get('Location')
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         confirm = request.form.get('confirmPassword')
 
-        if password != confirm:
-            flash('Passwords do not match.')
-            return redirect(url_for('routes_bp.signup'))
-        if Pharmacist.query.filter_by(email=email).first():
-            flash('Email already exists.')
-            return redirect(url_for('routes_bp.signup'))
+#         if password != confirm:
+#             flash('Passwords do not match.')
+#             return redirect(url_for('routes_bp.signup'))
+#         if Pharmacist.query.filter_by(email=email).first():
+#             flash('Email already exists.')
+#             return redirect(url_for('routes_bp.signup'))
 
-        pharmacist = Pharmacist(name=name, location=location, email=email)
-        pharmacist.set_password(password)
-        db.session.add(pharmacist)
-        db.session.commit()
-        return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
+#         pharmacist = Pharmacist(name=name, location=location, email=email)
+#         pharmacist.set_password(password)
+#         db.session.add(pharmacist)
+#         db.session.commit()
+#         return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
     
-    return render_template('signup.html')
+#     return render_template('signup.html')
 
 
 
@@ -37,10 +37,6 @@ def profile():
 @routes_bp.route("/")
 def home():
     return render_template('index.html')
-
-@routes_bp.route("/whoareyou")
-def identity():
-    return render_template('who_are_you.html')
 
 @routes_bp.route('/status')
 def status_page():
@@ -112,16 +108,21 @@ def add_medicine():
 #         new_me
 #     return render_template('medicine.html')
 
-@routes_bp.route("/search<query>")
+@routes_bp.route("/search")
 def search():
-    result=""
-    return render_template("search.html",result=result)
+    query = request.args.get("query")  # gets ?query=value from URL
+    result = []
+
+    if query:
+        # Example SQLAlchemy model query
+        result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+
+    return render_template("search.html", result=result)
+
 
 @routes_bp.route('/accRej')
 def accept_reject():
     return render_template("accRej.html")
-
-
 
 @routes_bp.route('/who_are_you')
 def who_are_you():

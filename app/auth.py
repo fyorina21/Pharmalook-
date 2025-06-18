@@ -35,7 +35,7 @@ def login():
         session['username'] = user.name
 
         print("Logged in successfully")
-        return redirect(url_for("routes_bp.home"))
+        return redirect(url_for("routes_bp.search"))
 
     return render_template("login.html")
 
@@ -60,10 +60,17 @@ def signup():
         db.session.commit()
 
 
-        session['id'] = user.id
-        session['username'] = user.name
-        flash("Registered successfully", "success")
-        return redirect(url_for("routes_bp.home"))
+        if user:
+            session['id'] = user.id
+            session['username'] = user.name
+            flash("Registered successfully", "success")
+            # maybe redirect or return success
+            
+        else:
+            flash("User not found. Please check your email or sign up.")
+            return redirect(url_for("auth_bp.signup"))  # or wherever your signup route is
+
+        return redirect(url_for("routes_bp.search"))
     print("error")
     return render_template("signup.html")
 
@@ -99,7 +106,7 @@ def psignup():
 
 
 
-@auth_bp.route("/auth/logout")
+@auth_bp.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for('routes_bp.home')) 
