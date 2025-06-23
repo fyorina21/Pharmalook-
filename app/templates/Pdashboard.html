@@ -22,7 +22,8 @@
     <main class="main-container">
         <section class="form-section">
             <h2 class="section-btn">Add a Medicine to the Page </h2>
-            <!-- <form action="/add-medicine" method="POST"> -->
+            <form action="add-medicine" method="POST">
+
                 <label>Medicine Name</label>
                 <input type="text" name="Medicinename" placeholder="Enter medicine name" required>
 
@@ -46,12 +47,23 @@
                 <button type="submit">Remove</button>
             </form>
         </section>
+
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <p class="flash {{ category }}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %} -->
+
     </main>
 </body>
 </html>
 
 
-<section class="medicine-list">
+<!-- <section class="medicine-list">
     <h2>Current Medicines</h2>
     <ul>
         {% for med in medicines %}
@@ -60,4 +72,4 @@
             </li>
         {% endfor %}
     </ul>
-</section>
+</section> -->
