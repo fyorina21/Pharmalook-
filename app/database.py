@@ -36,8 +36,8 @@ class Pharmacist(db.Model):
     status = db.Column(db.String(20), default='pending') 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def set_password(self, passwords):
+        self.password = generate_password_hash(passwords)
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    def check_password(self, passwords):
+        return check_password_hash(self.password, passwords)

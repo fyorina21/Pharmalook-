@@ -75,34 +75,34 @@ def signup():
     return render_template("signup.html")
 
 
-
 @auth_bp.route("/psignup", methods=["GET", "POST"])
 def psignup():
     if request.method == "POST":
         name = request.form.get("name")
-        lastname = request.form.get("lastname")
+        location = request.form.get("location")
         email = request.form.get("email")
         password = request.form.get("password")
 
+        # Check if the email already exists
         user = Users.query.filter_by(email=email).first()
         if user:
-            print("User exists with this email. Try logging in.", "error")
+            print("Pharmacist already registered with this email. Please log in.", "error")
             return redirect(url_for("auth_bp.psignup"))
 
-        new_user = Users(name=name,lastname=lastname, email=email)
+        # Create a new pharmacist user
+        new_user = Users(name=name, location=location, email=email, user_type="pharmacist")
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
 
+        session['id'] = new_user.id
+        session['username'] = new_user.name
+        session['user_type'] = new_user.user_type
 
-        session['id'] = user.id
-        session['username'] = user.name
-        flash("Registered successfully", "success")
+        flash("Pharmacist registered successfully", "success")
         return redirect(url_for("routes_bp.home"))
-    print("error")
+
     return render_template("psignup.html")
-
-
 
 
 
