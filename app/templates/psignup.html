@@ -20,8 +20,8 @@
           <input type="text" id="firstName" name="firstName" required />
         </div>
         <div class="field">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" required />
+          <label for="Location">Location</label>
+          <input type="text" id="Location" name="Location" required />
         </div>
       </div>
       <div class="field">
@@ -46,7 +46,7 @@
 
       <button type="submit">Sign Up</button>
 
-      <p class="signin-link">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+      <p class="signin-link">Already have an account? <a href="{{ url_for('auth_bp.login') }}">Sign in</a></p>
     </form>
     
   </div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Inventory</title>
+    <img src="static/images/photo_2025-03-31_17-08-08-removebg-preview.png" alt="logo">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #E5FFD7;
+            padding: 40px;
+        }
+        img{
+            margin-top: -100px;
+            width: 300px;
+            height: auto;
+            margin-bottom: -90px;
+  
+        }
+        a{
+            margin-left: 1060px;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 12px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: white;
+            color: gray;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-data {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <a href="pprofile.html">back</a>
+
+    <h1>Medicine Inventory</h1>
+
+    {% if medicines %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Dosage</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med in medicines %}
+            <tr>
+                <td>{{ med.name }}</td>
+                <td>{{ med.price }}</td>
+                <td>{{ med.dosage }}</td>
+                <td>${{ med.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-data">No medicines found in the database.</p>
+    {% endif %}
+</body>
+</html>

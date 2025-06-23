@@ -4,13 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nearby Pharmacy</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="static/styles.css"/>
 </head>
 <body>
   <div class="container">
     <header>
       <h1><span>Nearby</span><br/>Pharmacy</h1>
-      <input type="text" placeholder="🔍 search for medicine" class="search-bar" />
+      <form action="{{ url_for('routes_bp.search') }}" method="GET">
+          <input type="text" name="query" placeholder="🔍 search for medicine" class="search-bar" >
+      </form>
     </header>
 
     <!-- Kenema Pharmacy -->
