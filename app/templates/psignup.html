@@ -10,19 +10,18 @@
 <img src="static/images/photo_2025-03-31_17-08-08-removebg-preview.png" alt="PharmaLook Logo" class="logo" />
 
   <div class="container">
-    <form action="{{ url_for('auth_bp.signup') }}" method="post">
-
+    <form class="signup-form">
       <h2>Sign Up</h2>
       <p>Enter your information to create an account</p>
 
       <div class="name-fields">
         <div class="field">
           <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="name" required />
+          <input type="text" id="firstName" name="firstName" required />
         </div>
         <div class="field">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastname" required />
+          <label for="Location">Location</label>
+          <input type="text" id="Location" name="Location" required />
         </div>
       </div>
       <div class="field">
