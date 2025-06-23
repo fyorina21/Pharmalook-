@@ -2,6 +2,10 @@ from flask import Flask
 from app.routes import routes_bp
 from app.auth import auth_bp
 from app.database import db
+
+
+
+
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "sdsdsdsdSERER#$#$EDtfrrdesswsdfghhgf"
@@ -11,3 +15,4 @@ def create_app():
     app.register_blueprint(routes_bp)
     app.register_blueprint(auth_bp)
     return app
+app = create_app()

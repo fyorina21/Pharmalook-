@@ -27,6 +27,18 @@ def medicine():
 #         new_me
 #     return render_template('medicine.html')
 
+@routes_bp.route("/who")
+def who():
+    return render_template("who_are_you.html")
+
+@routes_bp.route("/admin/pending", methods=["GET"])
+
+def view_pending():
+    pharmacists = Pharmacist.query.filter_by(status='pending').all()
+    return render_template("accRej.html", pharmacists=pharmacists)
+
+
+
 @routes_bp.route("/search<query>")
 def search():
     result=""
