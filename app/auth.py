@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
-from .database import Users,db
+from .database import Users,db,Pharmacist
 auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -45,17 +45,17 @@ def login():
 def psignup():
     if request.method == "POST":
         name = request.form.get("name")
-        location = request.form.get("loaction")
+        location = request.form.get("location")
         email = request.form.get("email")
         password = request.form.get("password")
 
-        user = Users.query.filter_by(email=email).first()
-        if pharmacist:
+        user = Pharmacist.query.filter_by(email=email).first()
+        if user:
             print("User exists with this email. Try logging in.", "error")
             return redirect(url_for("auth_bp.signup"))
 
-        pharmacist = Users(name=name,location=location, email=email)
-        user.set_password(password)
+        pharmacist = Pharmacist(name=name,location=location, email=email)
+        pharmacist.set_password(password)
         db.session.add(pharmacist)
         db.session.commit()
 

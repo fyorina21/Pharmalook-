@@ -4,29 +4,29 @@ from .database import Pharmacist, db, Medicine
 
 routes_bp = Blueprint("routes_bp", __name__)
 
-@routes_bp.route('/psignup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        name = request.form.get('firstName')
-        location = request.form.get('Location')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        confirm = request.form.get('confirmPassword')
+# @routes_bp.route('/psignup', methods=['GET', 'POST'])
+# def signup():
+#     if request.method == 'POST':
+#         name = request.form.get('name')
+#         location = request.form.get('location')
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         confirm = request.form.get('confirmPassword')
 
-        if password != confirm:
-            flash('Passwords do not match.')
-            return redirect(url_for('routes_bp.signup'))
-        if Pharmacist.query.filter_by(email=email).first():
-            flash('Email already exists.')
-            return redirect(url_for('routes_bp.psignup'))
+#         if password != confirm:
+#             flash('Passwords do not match.')
+#             return redirect(url_for('routes_bp.signup'))
+#         if Pharmacist.query.filter_by(email=email).first():
+#             flash('Email already exists.')
+#             return redirect(url_for('routes_bp.psignup'))
 
-        pharmacist = Pharmacist(name=name, location=location, email=email)
-        pharmacist.set_password(password)
-        db.session.add(pharmacist)
-        db.session.commit()
-        return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
+#         pharmacist = Pharmacist(name=name, location=location, email=email)
+#         pharmacist.set_password(password)
+#         db.session.add(pharmacist)
+#         db.session.commit()
+#         return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
     
-    return render_template('psignup.html')
+#     return render_template('psignup.html')
 
 
 
