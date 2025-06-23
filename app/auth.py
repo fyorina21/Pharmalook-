@@ -66,6 +66,34 @@ def logout():
 
 
 
+# @auth_bp.route("/add-medicine", methods=["POST"])
+# def add_medicine():
+#     name = request.form.get("Medicinename")
+#     price = request.form.get("price")
+#     dosage = request.form.get("Dosage")
+#     description = request.form.get("medicinedescription")
+
+#     if not name or not price or not dosage or not description:
+#         flash("All fields are required", "error")
+#         return redirect(url_for("routes_bp.pdashboard"))
+
+#     try:
+#         new_med = Medicine(
+#             Medicinename=name,
+#             price=float(price),
+#             Dosage=dosage,
+#             medicinedescription=description
+#         )
+#         db.session.add(new_med)
+#         db.session.commit()
+#         flash("Medicine added successfully", "success")
+#     except Exception as e:
+#         db.session.rollback()
+#         flash(f"Error: {str(e)}", "error")
+
+#     return redirect(url_for("routes_bp.pdashboard"))
+
+
 @auth_bp.route("/add-medicine", methods=["POST"])
 def add_medicine():
     name = request.form.get("Medicinename")
@@ -73,46 +101,53 @@ def add_medicine():
     dosage = request.form.get("Dosage")
     description = request.form.get("medicinedescription")
 
+    # Check for required fields
     if not name or not price or not dosage or not description:
-        flash("All fields are required", "error")
+        flash("All fields are required.", "error")
         return redirect(url_for("routes_bp.pdashboard"))
 
+    # Check if the medicine already exists
+    existing = Medicine.query.filter_by(Medicinename=name).first()
+    if existing:
+        flash("This medicine already exists. You cannot add it again.", "error")
+        return redirect(url_for("routes_bp.pdashboard"))
+
+    # Add new medicine
     try:
-        new_med = Medicine(
+        new_medicine = Medicine(
             Medicinename=name,
             price=float(price),
             Dosage=dosage,
             medicinedescription=description
         )
-        db.session.add(new_med)
+        db.session.add(new_medicine)
         db.session.commit()
-        flash("Medicine added successfully", "success")
+        flash("Medicine added successfully!", "success")
     except Exception as e:
         db.session.rollback()
-        flash(f"Error: {str(e)}", "error")
+        flash(f"Error while adding medicine: {e}", "error")
 
     return redirect(url_for("routes_bp.pdashboard"))
 
 
 
-
-
 @auth_bp.route("/remove-medicine", methods=["POST"])
 def remove_medicine():
-    name = request.form.get("Medicinename")
-
+    name = request.form.get("medicine_name")
     if not name:
-        flash("Medicine name is required", "error")
-        return redirect(url_for("pdashboard.html"))
+        flash("Please enter a medicine name.", "error")
+        return redirect(url_for("routes_bp.pdashboard"))
 
-    medicine = Medicine.query.filter_by(Medicinename=name).first()
-
-    if medicine:
-        db.session.delete(medicine)
-        db.session.commit()
-        flash(f"Medicine '{name}' removed successfully", "success")
+    med = Medicine.query.filter_by(Medicinename=name).first()
+    if not med:
+        flash("Medicine not found.", "error")
+        
     else:
-        flash(f"Medicine '{name}' not found", "error")
+        db.session.delete(med)
+        db.session.commit()
+        flash("Medicine removed successfully.", "success")
 
-    return redirect(url_for("pdashboard.html"))
+    return redirect(url_for("routes_bp.pdashboard"))
+
+
 

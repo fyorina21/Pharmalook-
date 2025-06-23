@@ -40,15 +40,36 @@
             </form>
         </section>
 
-        <section class="remove-medicine">
+        <!-- <section class="remove-medicine">
             <h2>Remove Medicine</h2>
             <form>
-                <input type="text" placeholder="Enter medicine name to remove">
+                <form action="/remove-medicine" method="POST">
+                 <input type="text" name="medicine_name" placeholder="Enter medicine name to remove">
+
+                
                 <button type="submit">Remove</button>
             </form>
-        </section>
+        </section> -->
+        <section class="remove-medicine">
+    <h2>Remove Medicine</h2>
+    <form action="/remove-medicine" method="POST">
+        <input type="text" name="medicine_name" placeholder="Enter medicine name to remove" required>
+        <button type="submit">Remove</button>
+    </form>
+</section>
 
-        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+
+        
+
+    </main>
+</body>
+</html>
+
+
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <div class="flashes">
       {% for category, message in messages %}
@@ -56,20 +77,4 @@
       {% endfor %}
     </div>
   {% endif %}
-{% endwith %} -->
-
-    </main>
-</body>
-</html>
-
-
-<!-- <section class="medicine-list">
-    <h2>Current Medicines</h2>
-    <ul>
-        {% for med in medicines %}
-            <li>
-                <strong>{{ med.Medicinename }}</strong> - ${{ med.price }} - {{ med.Dosage }} - {{ med.medicinedescription }}
-            </li>
-        {% endfor %}
-    </ul>
-</section> -->
+{% endwith %}

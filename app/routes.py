@@ -15,34 +15,6 @@ def home():
 def pdashboard():
     return render_template('pdashboard.html')
 
-# @routes_bp.route("/pdashboard")
-# def pharmadashboard():
-#         name = request.form.get("Medicinename")
-#         price = request.form.get("price")
-#         dosage = request.form.get("Dosage")
-#         description = request.form.get("medicinedescription")
-
-#         if not name or not price or not dosage or not description:
-#             flash("All fields are required", "error")
-#             return redirect(url_for("routes_bp.pharmadashboard"))  # or adjust if needed
-
-#         try:
-#             new_medicine = Medicine(
-#                 Medicinename=name,
-#                 price=float(price),
-#                 Dosage=dosage,
-#                 medicinedescription=description
-#             )
-#             db.session.add(new_medicine)
-#             db.session.commit()
-#             flash("✅ Medicine added successfully!", "success")
-#         except Exception as e:
-#             db.session.rollback()
-#             flash(f"❌ Error adding medicine: {e}", "error")
-
-
-#         # return redirect(url_for("routes_bp.pharmadashboard"))
-#         return render_template('pdashboard.html')
 
 
 @routes_bp.route('/medicine')
