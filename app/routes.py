@@ -68,40 +68,17 @@ def inventory_page():
 def medicine():
     return render_template('medicine.html')
 
+@routes_bp.route('/pdashboard')
+def pdashboard():
+    return render_template('pdashboard.html')
+
+
 @routes_bp.route('/medicines')
 def medicine_list():
     medicines = Medicine.query.all()
     return render_template('medicine_list.html', medicines=medicines)
 
-@routes_bp.route('/medicines/add', methods=['GET', 'POST'])
-def add_medicine():
-    if request.method == 'POST':
-        medicinename = request.form.get('Medicinename')
-        price = request.form.get('price')
-        dosage = request.form.get('Dosage')
-        description = request.form.get('medicinedescription')
 
-        if not all([medicinename, price, dosage, description]):
-            flash('All fields are required!', 'error')
-        else:
-            try:
-                new_medicine = Medicine(
-                    Medicinename=medicinename,
-                    price=float(price),
-                    Dosage=dosage,
-                    medicinedescription=description
-                )
-                db.session.add(new_medicine)
-                db.session.commit()
-                flash('Medicine added successfully!', 'success')
-                return redirect(url_for('routes_bp.medicine_list'))
-            except ValueError:
-                flash('Invalid price format', 'error')
-            except Exception as e:
-                db.session.rollback()
-                flash(f'Error adding medicine: {str(e)}', 'error')
-
-    return render_template('add_medicine.html')
 
 # @routes_bp.route('/phamacist',methods=["GET","POST"])
 # def medicine():
@@ -111,8 +88,6 @@ def add_medicine():
 #         dosage = request.form.get("dosage")
 #         description = request.form.get("description")
 
-#         new_me
-#     return render_template('medicine.html')
 
 @routes_bp.route("/search")
 def search():

@@ -1,5 +1,9 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
 from .database import Users,db
+from app.database import Medicine
+
+
+
 auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -110,3 +114,92 @@ def psignup():
 def logout():
     session.clear()
     return redirect(url_for('routes_bp.home')) 
+
+
+
+
+# @auth_bp.route("/add-medicine", methods=["POST"])
+# def add_medicine():
+#     name = request.form.get("Medicinename")
+#     price = request.form.get("price")
+#     dosage = request.form.get("Dosage")
+#     description = request.form.get("medicinedescription")
+
+#     if not name or not price or not dosage or not description:
+#         flash("All fields are required", "error")
+#         return redirect(url_for("routes_bp.pdashboard"))
+
+#     try:
+#         new_med = Medicine(
+#             Medicinename=name,
+#             price=float(price),
+#             Dosage=dosage,
+#             medicinedescription=description
+#         )
+#         db.session.add(new_med)
+#         db.session.commit()
+#         flash("Medicine added successfully", "success")
+#     except Exception as e:
+#         db.session.rollback()
+#         flash(f"Error: {str(e)}", "error")
+
+#     return redirect(url_for("routes_bp.pdashboard"))
+
+
+@auth_bp.route("/add-medicine", methods=["POST"])
+def add_medicine():
+    name = request.form.get("Medicinename")
+    price = request.form.get("price")
+    dosage = request.form.get("Dosage")
+    description = request.form.get("medicinedescription")
+
+    # Check for required fields
+    if not name or not price or not dosage or not description:
+        flash("All fields are required.", "error")
+        return redirect(url_for("routes_bp.pdashboard"))
+
+    # Check if the medicine already exists
+    existing = Medicine.query.filter_by(Medicinename=name).first()
+    if existing:
+        flash("This medicine already exists. You cannot add it again.", "error")
+        return redirect(url_for("routes_bp.pdashboard"))
+
+    # Add new medicine
+    try:
+        new_medicine = Medicine(
+            Medicinename=name,
+            price=float(price),
+            Dosage=dosage,
+            medicinedescription=description
+        )
+        db.session.add(new_medicine)
+        db.session.commit()
+        flash("Medicine added successfully!", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Error while adding medicine: {e}", "error")
+
+    return redirect(url_for("routes_bp.pdashboard"))
+
+
+
+@auth_bp.route("/remove-medicine", methods=["POST"])
+def remove_medicine():
+    name = request.form.get("medicine_name")
+    if not name:
+        flash("Please enter a medicine name.", "error")
+        return redirect(url_for("routes_bp.pdashboard"))
+
+    med = Medicine.query.filter_by(Medicinename=name).first()
+    if not med:
+        flash("Medicine not found.", "error")
+        
+    else:
+        db.session.delete(med)
+        db.session.commit()
+        flash("Medicine removed successfully.", "success")
+
+    return redirect(url_for("routes_bp.pdashboard"))
+
+
+
