@@ -32,7 +32,8 @@ routes_bp = Blueprint("routes_bp", __name__)
 
 @routes_bp.route('/profile')
 def profile():
-    return render_template('pprofile.html')
+    pharmacies= Pharmacist.query.all()
+    return render_template('pprofile.html', pharmacies=pharmacies)
 
 @routes_bp.route("/")
 def home():
@@ -51,16 +52,13 @@ def status_page():
                            request_date=pharmacist.created_at.strftime('%Y-%m-%d'),
                            status=pharmacist.status)
 
-@routes_bp.route('/inventory')
-def inventory_page():
-    medicines = Medicine.query.all()
-    return render_template('inventory.html', medicines=medicines)
-
-
-
 @routes_bp.route('/medicine')
 def medicine():
-    return render_template('medicine.html')
+    medicines = Medicine.query.all()
+    return render_template('medicine.html', medicines=medicines)
+
+
+
 
 @routes_bp.route('/medicines')
 def medicine_list():
@@ -129,12 +127,12 @@ def who_are_you():
     return render_template("who_are_you.html")
 
 
-@routes_bp.route('/admin-dashboard')
-def pharmacies():
-    # Query all pharmacists where is_accepted is True
-    pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
+# @routes_bp.route('/admin-dashboard')
+# def pharmacies():
+#     # Query all pharmacists where is_accepted is True
+#     pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
     
-    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+#     return render_template("admin-dashboard.html", pharmacist=pharmacist)
 
 
 
