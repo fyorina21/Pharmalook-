@@ -38,6 +38,11 @@ def profile():
 def home():
     return render_template('index.html')
 
+@routes_bp.route("/user")
+def user_homepage():
+    return render_template('look.html')
+
+
 @routes_bp.route('/status')
 def status_page():
     email = request.args.get('email')
