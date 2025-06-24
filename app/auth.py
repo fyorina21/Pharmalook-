@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
 from .database import Users,db
-from app.database import Medicine
+from app.database import Medicine, Pharmacist
 
 
 
@@ -88,13 +88,13 @@ def psignup():
         password = request.form.get("password")
 
         # Check if the email already exists
-        user = Users.query.filter_by(email=email).first()
+        user = Pharmacist.query.filter_by(email=email).first()
         if user:
             print("Pharmacist already registered with this email. Please log in.", "error")
             return redirect(url_for("auth_bp.psignup"))
 
         # Create a new pharmacist user
-        new_user = Users(name=name, location=location, email=email, user_type="pharmacist")
+        new_user = Pharmacist(name=name, location=location, email=email, user_type="pharmacist")
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
