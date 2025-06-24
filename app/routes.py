@@ -38,18 +38,24 @@ def profile():
 def home():
     return render_template('index.html')
 
-@routes_bp.route('/status')
+@routes_bp.route('/psignup/status')
 def status_page():
     email = request.args.get('email')
+
+    if not email:
+        flash('No email provided.')
+        return redirect(url_for('routes_bp.signup'))
+
     pharmacist = Pharmacist.query.filter_by(email=email).first()
 
     if not pharmacist:
         flash('Pharmacist not found.')
         return redirect(url_for('routes_bp.signup'))
 
-    return render_template('status.html', pharmacy_name=pharmacist.name,
-                           request_date=pharmacist.created_at.strftime('%Y-%m-%d'),
-                           status=pharmacist.status)
+    return render_template('status.html',
+                           pharmacy_name=Pharmacist.name,
+                           request_date=Pharmacist.created_at.strftime('%Y-%m-%d'),
+                           status=Pharmacist.status)
 
 @routes_bp.route('/inventory')
 def inventory_page():
