@@ -52,7 +52,7 @@ def psignup():
         user = Pharmacist.query.filter_by(email=email).first()
         if user:
             print("User exists with this email. Try logging in.", "error")
-            return redirect(url_for("auth_bp.signup"))
+            return redirect(url_for("auth_bp.psignup"))
 
         pharmacist = Pharmacist(name=name,location=location, email=email)
         pharmacist.set_password(password)
