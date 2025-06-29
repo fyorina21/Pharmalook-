@@ -4,11 +4,11 @@ from .database import Pharmacist, db, Medicine
 
 routes_bp = Blueprint("routes_bp", __name__)
 
-# @routes_bp.route('/signup', methods=['GET', 'POST'])
+# @routes_bp.route('/psignup', methods=['GET', 'POST'])
 # def signup():
 #     if request.method == 'POST':
-#         name = request.form.get('firstName')
-#         location = request.form.get('Location')
+#         name = request.form.get('name')
+#         location = request.form.get('location')
 #         email = request.form.get('email')
 #         password = request.form.get('password')
 #         confirm = request.form.get('confirmPassword')
@@ -18,7 +18,7 @@ routes_bp = Blueprint("routes_bp", __name__)
 #             return redirect(url_for('routes_bp.signup'))
 #         if Pharmacist.query.filter_by(email=email).first():
 #             flash('Email already exists.')
-#             return redirect(url_for('routes_bp.signup'))
+#             return redirect(url_for('routes_bp.psignup'))
 
 #         pharmacist = Pharmacist(name=name, location=location, email=email)
 #         pharmacist.set_password(password)
@@ -26,13 +26,14 @@ routes_bp = Blueprint("routes_bp", __name__)
 #         db.session.commit()
 #         return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
     
-#     return render_template('signup.html')
+#     return render_template('psignup.html')
 
 
 
 @routes_bp.route('/profile')
 def profile():
-    return render_template('pprofile.html')
+    pharmacies= Pharmacist.query.all()
+    return render_template('pprofile.html', pharmacies=pharmacies)
 
 @routes_bp.route("/")
 def home():
@@ -57,16 +58,13 @@ def status_page():
                            request_date=Pharmacist.created_at.strftime('%Y-%m-%d'),
                            status=Pharmacist.status)
 
-@routes_bp.route('/inventory')
-def inventory_page():
-    medicines = Medicine.query.all()
-    return render_template('inventory.html', medicines=medicines)
-
-
-
 @routes_bp.route('/medicine')
 def medicine():
-    return render_template('medicine.html')
+    medicines = Medicine.query.all()
+    return render_template('medicine.html', medicines=medicines)
+
+
+
 
 @routes_bp.route('/pdashboard')
 def pdashboard():
@@ -110,12 +108,12 @@ def who_are_you():
     return render_template("who_are_you.html")
 
 
-@routes_bp.route('/admin-dashboard')
-def pharmacies():
-    # Query all pharmacists where is_accepted is True
-    pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
+# @routes_bp.route('/admin-dashboard')
+# def pharmacies():
+#     # Query all pharmacists where is_accepted is True
+#     pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
     
-    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+#     return render_template("admin-dashboard.html", pharmacist=pharmacist)
 
 
 
