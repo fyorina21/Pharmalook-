@@ -72,10 +72,10 @@ def pdashboard():
     return render_template('pdashboard.html')
 
 
-@routes_bp.route('/medicines')
-def medicine_list():
-    medicines = Medicine.query.all()
-    return render_template('medicine_list.html', medicines=medicines)
+# @routes_bp.route('/medicines')
+# def medicine_list():
+#     medicines = Medicine.query.all()
+#     return render_template('medicine_list.html', medicines=medicines)
 
 
 

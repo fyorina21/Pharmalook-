@@ -156,7 +156,7 @@ def psignup():
         session['username'] = new_user.name
 
         flash("Pharmacist registered successfully", "success")
-        return redirect(url_for("routes_bp.home"))
+        return redirect(url_for("auth_bp.login"))
 
     return render_template("psignup.html")
 
@@ -166,8 +166,6 @@ def psignup():
 def logout():
     session.clear()
     return redirect(url_for('routes_bp.home')) 
-
-
 
 
 # @auth_bp.route("/add-medicine", methods=["POST"])
