@@ -38,9 +38,25 @@ def profile():
 def home():
     return render_template('index.html')
 
-@routes_bp.route("/user")
+@routes_bp.route("/user", methods=["GET"])
 def user_homepage():
-    return render_template('look.html')
+    # Get search query from URL parameters (default to empty string if none)
+    search_query = request.args.get("q", "").strip()
+
+    
+    if search_query:
+        results = Medicine.query.filter(
+            Medicine.Medicinename.ilike(f"%{search_query}%")
+        ).all()
+    else:
+        results = Medicine.query.all()
+
+    
+    return render_template(
+        "look.html",
+        medicines=results,
+        query=search_query
+    )
 
 
 @routes_bp.route('/status')
@@ -61,6 +77,9 @@ def inventory_page():
     medicines = Medicine.query.all()
     return render_template('inventory.html', medicines=medicines)
 
+@routes_bp.route('/pdashboard')
+def pdashboard():
+    return render_template('pdashboard.html')
 
 
 @routes_bp.route('/medicine')

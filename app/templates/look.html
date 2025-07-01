@@ -2,20 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nearby Pharmacy</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='look.css') }}" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1><span>Nearby</span><br/>Pharmacy</h1>
-      <input type="text" placeholder="🔍 search for medicine" class="search-bar" />
-    </header>
+  <header>
+    <h1><span>Nearby Pharmacy</span></h1>
+    
+    <!-- Search form -->
+    <form id="search-form" method="get" action="{{ url_for('routes_bp.user_homepage') }}">
+      <input 
+        type="text" 
+        id="search-bar" 
+        name="q" 
+        placeholder="🔍 Search for medicine" 
+        class="search-bar" 
+        value="{{ query | default('') }}" 
+      />
+      <button type="submit" style="display: none;"></button> 
+    </form>
+  </header>
 
-    <!-- Dynamic pharmacy cards will be injected here by JavaScript -->
-    <div id="pharmacy-list"></div>
-    <div id="no-results">No results found.</div>
+
+  <div class="main">
+    {% if medicines and medicines|length > 0 %}
+      <div id="pharmacy-list">
+        <ul>
+          {% for med in medicines %}
+            <li class="medicine-item">
+              <strong>{{ med.Medicinename }}</strong><br />
+              <span><strong>Dosage:</strong> {{ med.Dosage }}</span><br />
+              <span><strong>Price:</strong> ${{ med.price }}</span><br />
+              <span><strong>Description:</strong> {{ med.medicinedescription }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      <div class="result">
+        No results found{% if query %} for "{{ query }}"{% endif %}.
+      </div>
+    {% endif %}
   </div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>

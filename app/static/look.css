@@ -11,10 +11,18 @@ body {
 }
 
 .container {
-  max-width: 600px;
-  margin: auto;
+  width: 100%;
+  height: 100vh;
+  background: #33333300;
+  position: relative;
+  top: 60px;
 }
-
+.main{
+  width: 100%;
+  height: 100vh;
+  background: #55555500;
+  color: #ffffff;
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -27,10 +35,8 @@ header {
 }
 
 header h1 {
-  font-size: 48px;
+  font-size: 24px;
   line-height: 1.3;
-  font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .search-bar {
@@ -63,7 +69,9 @@ header h1 {
   font-size: 14px;
   color: #555;
 }
-
+.result{
+  color: #eff1ef;
+}
 .pharmacy-header button {
   background: none;
   border: none;
@@ -95,4 +103,17 @@ header h1 {
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
+}
+.pharmacy-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #dcf5d5;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.no-results{
+  background: red;
 }
