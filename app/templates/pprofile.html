@@ -123,12 +123,10 @@
       <h3>Pharmacy Profile</h3>
   <div class="profile-details">
     {% if pharmacies %}
-      {%for Pharmacist in pharmacies%}
-    <p><strong>Name:</strong> {{ Pharmacist.name }}</p>
-    <p><strong>Location:</strong> {{ Pharmacist.location }}</p>
-    <p><strong>Contact:</strong> {{ Pharmacist.phone_number }}</p>
-    <p><strong>Email:</strong> {{ Pharmacist.email }}</p>
-    {% endfor %}
+    <p><strong>Name:</strong> {{ pharmacies.name }}</p>
+    <p><strong>Location:</strong> {{ pharmacies.location }}</p>
+    <p><strong>Contact:</strong> {{ pharmacies.phone_number }}</p>
+    <p><strong>Email:</strong> {{ pharmacies.email }}</p>
   {% else %}
   <p>No pharmacy profile found.</p>
   {% endif %}
