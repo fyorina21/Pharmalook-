@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template, request, redirect, url_for, flash
+from flask import Blueprint,render_template, request, redirect, url_for, flash, session
 from .database import Pharmacist, db, Medicine
 from sqlalchemy import delete
 
@@ -33,7 +33,14 @@ routes_bp = Blueprint("routes_bp", __name__)
 
 @routes_bp.route('/profile')
 def profile():
-    pharmacies= Pharmacist.query.all()
+    if 'id' not in session:
+        return redirect(url_for('auth_bp.login'))  # User not logged in
+
+    pharmacies = Pharmacist.query.get(session['id'])
+
+    if not pharmacies:
+        return "Pharmacist not found", 404
+
     return render_template('pprofile.html', pharmacies=pharmacies)
 
 @routes_bp.route("/")
