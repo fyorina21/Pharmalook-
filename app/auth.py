@@ -1,13 +1,7 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
-<<<<<<< HEAD
-from .database import Users,db
-from app.database import Medicine, Pharmacist
 
 
-
-=======
-from .database import Users,db,Pharmacist
->>>>>>> new
+from .database import Users,db,Pharmacist, Medicine
 auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -117,40 +111,37 @@ def signup():
     return render_template("signup.html")
 
 
-<<<<<<< HEAD
-@auth_bp.route("/psignup", methods=["GET", "POST"])
-def psignup():
-    if request.method == "POST":
-        name = request.form.get("name")
-        location = request.form.get("location")
-        email = request.form.get("email")
-        password = request.form.get("password")
+# @auth_bp.route("/psignup", methods=["GET", "POST"])
+# def psignup():
+#     if request.method == "POST":
+#         name = request.form.get("name")
+#         location = request.form.get("location")
+#         email = request.form.get("email")
+#         password = request.form.get("password")
 
-        # Check if the email already exists
-        user = Pharmacist.query.filter_by(email=email).first()
-        if user:
-            print("Pharmacist already registered with this email. Please log in.", "error")
-            return redirect(url_for("auth_bp.psignup"))
+#         # Check if the email already exists
+#         user = Pharmacist.query.filter_by(email=email).first()
+#         if user:
+#             print("Pharmacist already registered with this email. Please log in.", "error")
+#             return redirect(url_for("auth_bp.psignup"))
 
-        # Create a new pharmacist user
-        new_user = Pharmacist(name=name, location=location, email=email, user_type="pharmacist")
-        new_user.set_password(password)
-        db.session.add(new_user)
-        db.session.commit()
+#         # Create a new pharmacist user
+#         new_user = Pharmacist(name=name, location=location, email=email, user_type="pharmacist")
+#         new_user.set_password(password)
+#         db.session.add(new_user)
+#         db.session.commit()
 
-        session['id'] = new_user.id
-        session['username'] = new_user.name
-        session['user_type'] = new_user.user_type
+#         session['id'] = new_user.id
+#         session['username'] = new_user.name
+#         session['user_type'] = new_user.user_type
 
-        flash("Pharmacist registered successfully", "success")
-        return redirect(url_for("routes_bp.home"))
+#         flash("Pharmacist registered successfully", "success")
+#         return redirect(url_for("routes_bp.home"))
 
-    return render_template("psignup.html")
-
+#     return render_template("psignup.html")
 
 
-=======
->>>>>>> new
+
 @auth_bp.route("/logout")
 def logout():
     session.clear()

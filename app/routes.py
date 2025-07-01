@@ -1,5 +1,6 @@
 from flask import Blueprint,render_template, request, redirect, url_for, flash
 from .database import Pharmacist, db, Medicine
+from sqlalchemy import delete
 
 
 routes_bp = Blueprint("routes_bp", __name__)
@@ -107,13 +108,17 @@ def accept_reject():
 def who_are_you():
     return render_template("who_are_you.html")
 
-
-# @routes_bp.route('/admin-dashboard')
-# def pharmacies():
-#     # Query all pharmacists where is_accepted is True
-#     pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
+@routes_bp.route('/admin-dashboard')
+def pharmacies():
+    # Query all pharmacists where is_accepted is True
+    pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
     
-#     return render_template("admin-dashboard.html", pharmacist=pharmacist)
+    return render_template("admin-dashboard.html", pharmacist=pharmacist)
 
-
-
+@routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
+def delete_pharmacy(pharmacy_id):
+    with db.connect() as conn:
+        stmt = delete(Pharmacist).where(Pharmacist.c.id == pharmacy_id)
+        conn.execute(stmt)
+        conn.commit()
+    return redirect(url_for('pharmacies'))
