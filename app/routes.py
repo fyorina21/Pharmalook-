@@ -47,7 +47,25 @@ def profile():
 def home():
     return render_template('index.html')
 
-@routes_bp.route('/psignup/status')
+@routes_bp.route("/user", methods=["GET"])
+def user_homepage():
+    # Get search query from URL parameters (default to empty string if none)
+    search_query = request.args.get("q", "").strip()
+    results = []
+    if search_query:
+        # Search for medicines by name (case-insensitive)
+        results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
+    else:
+        # If no search, show all medicines
+        results = Medicine.query.all()
+    return render_template(
+        "look.html",
+        medicines=results,
+        query=search_query
+    )
+
+
+@routes_bp.route('/status')
 def status_page():
     email = request.args.get('email')
 
@@ -61,10 +79,19 @@ def status_page():
         flash('Pharmacist not found.')
         return redirect(url_for('routes_bp.signup'))
 
-    return render_template('status.html',
-                           pharmacy_name=Pharmacist.name,
-                           request_date=Pharmacist.created_at.strftime('%Y-%m-%d'),
-                           status=Pharmacist.status)
+    return render_template('status.html', pharmacy_name=pharmacist.name,
+                           request_date=pharmacist.created_at.strftime('%Y-%m-%d'),
+                           status=pharmacist.status)
+
+@routes_bp.route('/inventory')
+def inventory_page():
+    medicines = Medicine.query.all()
+    return render_template('inventory.html', medicines=medicines)
+
+@routes_bp.route('/pdashboard')
+def pdashboard():
+    return render_template('pdashboard.html')
+
 
 @routes_bp.route('/medicine')
 def medicine():
@@ -95,16 +122,17 @@ def pdashboard():
 #         description = request.form.get("description")
 
 
-@routes_bp.route("/search")
-def search():
-    query = request.args.get("query")  # gets ?query=value from URL
-    result = []
 
-    if query:
-        # Example SQLAlchemy model query
-        result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+# @routes_bp.route("/search")
+# def search():
+#     query = request.args.get("query")  # gets ?query=value from URL
+#     result = []
 
-    return render_template("search.html", result=result)
+#     if query:
+#         # Example SQLAlchemy model query
+#         result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+
+#     return render_template("search.html", result=result)
 
 
 @routes_bp.route('/accRej')
