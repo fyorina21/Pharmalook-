@@ -42,16 +42,13 @@ def home():
 def user_homepage():
     # Get search query from URL parameters (default to empty string if none)
     search_query = request.args.get("q", "").strip()
-
-    
+    results = []
     if search_query:
-        results = Medicine.query.filter(
-            Medicine.Medicinename.ilike(f"%{search_query}%")
-        ).all()
+        # Search for medicines by name (case-insensitive)
+        results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
     else:
+        # If no search, show all medicines
         results = Medicine.query.all()
-
-    
     return render_template(
         "look.html",
         medicines=results,
@@ -132,16 +129,16 @@ def add_medicine():
 #         new_me
 #     return render_template('medicine.html')
 
-@routes_bp.route("/search")
-def search():
-    query = request.args.get("query")  # gets ?query=value from URL
-    result = []
+# @routes_bp.route("/search")
+# def search():
+#     query = request.args.get("query")  # gets ?query=value from URL
+#     result = []
 
-    if query:
-        # Example SQLAlchemy model query
-        result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+#     if query:
+#         # Example SQLAlchemy model query
+#         result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
 
-    return render_template("search.html", result=result)
+#     return render_template("search.html", result=result)
 
 
 @routes_bp.route('/accRej')

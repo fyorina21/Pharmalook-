@@ -39,9 +39,11 @@
         </ul>
       </div>
     {% else %}
-      <div class="result">
+    <div class="box">
+            <div class="container">
         No results found{% if query %} for "{{ query }}"{% endif %}.
       </div>
+    </div>
     {% endif %}
   </div>
 
