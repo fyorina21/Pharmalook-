@@ -129,3 +129,14 @@ def delete_pharmacy(pharmacy_id):
         conn.execute(stmt)
         conn.commit()
     return redirect(url_for('pharmacies'))
+
+
+@routes_bp.route('/status')
+def status():
+    pharmacist = Pharmacist.query.get(session['id'])
+    if pharmacist:
+        return render_template("status.html", pharmacist=pharmacist)
+    
+    else:
+        flash("Pharmacist not found.")
+        return redirect(url_for("auth_bp.login"))

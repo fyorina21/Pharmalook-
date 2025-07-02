@@ -120,14 +120,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: center;">{{ pharmacy_name }}</td>
-                        <td style="text-align: center;">{{ request_date }}</td>
+                        <td style="text-align: center;">{{ pharmacist.name }}</td>
+                        <td style="text-align: center;">{{ pharmacist.created_at }}</td>
                         <td style="text-align: center;">
-                            {% if status == 'pending' %}
+                            {% if pharmacist.status == 'pending' %}
                                 <span class="status-pending">pending...</span>
-                            {% elif status == 'accepted' %}
+                            {% elif pharmacist.status == 'accepted' %}
                                 <script>window.location.href = "{{ url_for('auth_bp.login') }}";</script>
-                            {% elif status == 'rejected' %}
+                            {% elif pharmacist.status == 'rejected' %}
                                 <span style="color: red; font-weight: 500;">rejected</span>
                             {% endif %}
                         </td>

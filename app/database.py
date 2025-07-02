@@ -32,9 +32,8 @@ class Pharmacist(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     admin_approved = db.Column(db.Boolean, default=False, nullable=False)
-    
-    # status = db.Column(db.String(20), default='pending') 
-    # created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), default='pending') 
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
    
     def set_password(self, passwords):

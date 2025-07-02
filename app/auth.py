@@ -1,7 +1,6 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
-
-
 from .database import Users,db,Pharmacist, Medicine
+
 auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -30,35 +29,32 @@ def login():
             print("User logged in successfully")
             return redirect(url_for("routes_bp.search"))
 
-        # user = Users.query.filter_by(email=email).first()
-
-        # if not user:
-        #     print("No account found with this email")
-        #     return render_template("login.html", error="Invalid email or password")
-
-        # if not user.check_password(password):
-        #     print("Invalid password")
-        #     return render_template("login.html", error="Invalid email or password")
-
-        # session['id'] = user.id
-        # session['username'] = user.name
-
-        # print("Logged in successfully")
-        # return redirect(url_for("routes_bp.search"))
-
 
         pharmacist = Pharmacist.query.filter_by(email=email).first()
         if pharmacist and pharmacist.check_password(password):
-            session['id'] = pharmacist.id
-            session['username'] = pharmacist.name
-            session['role'] = 'pharmacist'
-            print("Pharmacist logged in successfully")
-            return redirect(url_for("routes_bp.pdashboard"))  # replace with your pharmacist dashboard route
+                
+            if pharmacist.status == 'rejected':
+                flash("Your pharmacy registration has been rejected. Please contact admin for details.")
+                return redirect(url_for("auth_bp.login"))
+        
+            elif pharmacist.status == 'pending':
+                flash("Your pharmacy registration is still pending approval. Please wait.")
+                return redirect(url_for("routes_bp.status"))
 
-        # --- Invalid login ---
-        print("Invalid credentials")
-        return render_template("login.html", error="Invalid email or password")
+            elif pharmacist.admin_approved:
+                if pharmacist.status == 'pending':
+                    pharmacist.status = 'accepted'
+                    db.session.commit()
 
+                session['id'] = pharmacist.id
+                session['username'] = pharmacist.name
+                session['role'] = 'pharmacist'
+                print("Pharmacist logged in successfully")
+                return redirect(url_for("routes_bp.pdashboard")) 
+            
+        flash("Invalid email or password. Please try again.")
+        return redirect(url_for("auth_bp.login"))
+               
     return render_template("login.html")
 
 
