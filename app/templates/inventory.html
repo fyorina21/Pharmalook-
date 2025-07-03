@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E5FFD7;
+            margin: 30px;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* center the group as a whole */
+    margin-bottom: 50px;
+    position: relative;
+}
+
+    .logo {
+        height: 60px;
+        width: auto;
+}
+        
+       .header h1 {
+            position:absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: normal;
+            margin: 0;
+
+        }
+        
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px 20px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #F2FFF1;
+            font-weight: normal;
+            font-size: 16px;
+        }
+        
+        td {
+            height: 40px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    <img src="{{ url_for('static', filename='images/logo-bg.png') }}" alt="PharmaLook Logo" class="logo">
+    <h1>Medicine Inventory</h1>
+</div>
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Dosage</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+         {% for med in medicines %}
+             <tr>
+                <td>{{ med.Medicinename }}</td>
+                <td>{{ med.price }}</td>
+                <td>{{ med.Dosage }}</td>
+                <td>{{ med.medicinedescription }}</td>
+            </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
