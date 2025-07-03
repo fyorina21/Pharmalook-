@@ -14,7 +14,19 @@
      <img src="{{ url_for('static', filename='images/photo_2025-03-31_17-08-08-removebg-preview.png') }}" class="logo">
 
     </nav>
-  </div>
+   </div>
+
+<div class="new-pharmabox">New pharmacies
+</div>
+  {% if pharmacist %} 
+   <div class="viewer"> 
+      <div class="pharmacy-request">
+      {% for pharmacy in pharmacist %}
+        <p><strong> &#9877; {{ pharmacy.name }} </strong> </p>
+        <p style="font-size: 80%;"> &#x1F4CD;
+          {{ pharmacy.location }}
+         </p>
+      {% endfor %}
 
   <div class="new-pharmabox">New Pharmacies</div>
 
@@ -40,6 +52,17 @@
       <p style="text-align: center; margin-top: 30px;">No pharmacists are signed up yet.</p>
     {% endif %}
   </div>
+
+      </div>   
+      <div class="actions">
+        <button class="accept-btn">Accept</button>
+        <button class="reject-btn">Reject</button>
+      </div>
+  {% else %}
+      <h1> No registered pharmacies yet </h1>
+    </div>
+  {% endif %}
+ 
 
 </body>
 </html>

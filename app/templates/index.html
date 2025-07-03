@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
+{% block content %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" width="width=device-width" content="initial-scale=1.0">
-  <meta name="viewport" width="width=device-width" content="initial-scale=1.0">
-  <title>PharmaLook</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-
-
-  <!-- WELCOME  -->
   <div class="welcome">
     <header class="navbar">
       <div class="logo">
@@ -29,7 +16,11 @@
         <h2>{{ session.get('username') }}</h2>
         {% else %}
         <a href="{{ url_for('auth_bp.login') }}"><button class="nav-btn" id="loginBtn">Login</button></a>
+<<<<<<< HEAD
         <a href="{{ url_for('routes_bp.who') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+=======
+        <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+>>>>>>> 2e5175dec2eb79e5986c0a13e896e20eaec6473f
         {% endif %}
       </div>
 
@@ -41,7 +32,7 @@
         Whether you’re looking for a specific prescription drug or an over-the-counter medication,
         Pharmalook connects you to the closest pharmacy that has it in stock.
       </p>
-      <a href="{{ url_for('auth_bp.signup') }}"><button class="search-btn">Start Searching Now</button></a>
+      <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="search-btn">Start Searching Now</button></a>
     </div>
     <!-- Include: welcome text + "Start Searching Now" button -->
   </div>
@@ -157,7 +148,7 @@
       Skip the stress of visiting multiple pharmacies. Just tell us what medicine you need and where you are-PharmaLook
       finds it for you in seconds.
     </p>
-    <a href="{{ url_for('auth_bp.signup') }}"><button class="gt-button">Get started</button></a>
+    <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="gt-button">Get started</button></a>
   </div>
 
 
@@ -238,6 +229,6 @@
 
 
   <script src="static/images/script.js"></script>
-</body>
 
-</html>
+
+{% endblock %}

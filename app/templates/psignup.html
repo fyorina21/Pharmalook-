@@ -10,18 +10,28 @@
  <img style="width: 300px; padding-bottom: 20px;" src="{{ url_for('static', filename='images/photo_2025-03-31_17-08-08-removebg-preview.png') }}" alt="logo">
 
   <div class="container">
+<<<<<<< HEAD
     <form class="signup-form">
       <h2 >Sign Up</h2>
+=======
+<!-- <<<<<<< HEAD -->
+    <form class="signup-form" method="post" >
+<!-- ======= -->
+    <form action="{{ url_for('auth_bp.psignup') }}" method="post">
+
+<!-- >>>>>>> new -->
+      <h2>Sign Up</h2>
+>>>>>>> 2e5175dec2eb79e5986c0a13e896e20eaec6473f
       <p>Enter your information to create an account</p>
 
       <div class="name-fields">
         <div class="field">
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" required />
+          <label for="firstName">Pharmacy Name</label>
+          <input type="text" id="firstName" name="name" required />
         </div>
         <div class="field">
-          <label for="Location">Location</label>
-          <input type="text" id="Location" name="Location" required />
+          <label for="location">Location </label>
+          <input type="text" id="location" name="location" required />
         </div>
       </div>
       <div class="field">
