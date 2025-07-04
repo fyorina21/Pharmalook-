@@ -19,7 +19,7 @@
     {% for pharmacy in pharmacist %}
       <div class="viewer">
         <div class="pharmacy-request">
-          <p><strong> &#9877; {{ pharmacy.name }} </strong></p>
+          <p><strong> {{ pharmacy.name }} </strong></p>
           <p style="font-size: 80%;"> &#x1F4CD; {{ pharmacy.location }}</p>
         </div>   
 
@@ -35,7 +35,7 @@
     {% endfor %}
   {% else %}
     <div class="viewer">
-      <h1>No registered pharmacies yet</h1>
+      <h1 style="color: rgba(177, 177, 177, 0.785);">No registered pharmacies yet</h1>
     </div>
   {% endif %}
 </body>
