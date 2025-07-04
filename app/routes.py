@@ -129,6 +129,55 @@ def pdashboard():
     return render_template('pdashboard.html')
 
 
+<<<<<<< HEAD
+=======
+# @routes_bp.route('/medicines')
+# def medicine_list():
+#     medicines = Medicine.query.all()
+#     return render_template('medicine_list.html', medicines=medicines)
+
+
+
+# @routes_bp.route('/phamacist',methods=["GET","POST"])
+# def medicine():
+#     if request.method == "POST":
+#         name = request.form.get("name")
+#         price = request.form.get("price")
+#         dosage = request.form.get("dosage")
+#         description = request.form.get("description")
+
+
+<<<<<<< HEAD
+@routes_bp.route("/who")
+def who():
+    return render_template("who_are_you.html")
+
+@routes_bp.route("/admin/pending", methods=["GET"])
+
+def view_pending():
+    pharmacists = Pharmacist.query.filter_by(status='pending').all()
+    return render_template("accRej.html", pharmacists=pharmacists)
+
+
+
+@routes_bp.route("/search<query>")
+def search():
+    result=""
+    return render_template("search.html",result=result)
+=======
+
+# @routes_bp.route("/search")
+# def search():
+#     query = request.args.get("query")  # gets ?query=value from URL
+#     result = []
+
+#     if query:
+#         # Example SQLAlchemy model query
+#         result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+
+#     return render_template("search.html", result=result)
+
+>>>>>>> 2b3d141cf3d5e6c030b213c1166b57d8e218939b
 
 @routes_bp.route('/accRej')
 def accept_reject():
@@ -170,8 +219,12 @@ def status():
     else:
         flash("Pharmacist not found.")
         return redirect(url_for("auth_bp.login"))
+<<<<<<< HEAD
 
 @routes_bp.route('/admin/requests')
 def admin_requests():
     pending_pharmacies = Pharmacist.query.filter_by(admin_approved=False).all()
     return render_template('admin_requests.html', pharmacies=pending_pharmacies)
+=======
+>>>>>>> 2e5175dec2eb79e5986c0a13e896e20eaec6473f
+>>>>>>> 2b3d141cf3d5e6c030b213c1166b57d8e218939b
