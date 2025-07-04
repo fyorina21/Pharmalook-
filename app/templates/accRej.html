@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acc and Rej </title>
     <link rel="stylesheet" href="static/AccRej.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   </head>
   <body>
+
    <div class="backG">
     
     <nav class="nav_acc_rej">
-      <img src="static/images/photo_2025-03-31_17-08-08-removebg-preview.png">
+      <a href="{{ url_for('routes_bp.admin_dashboard') }}" class="back-arrow-icon">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <img src="static/images/photo_2025-03-31_17-08-08-removebg-preview.png" class="nav-logo">
     </nav>
+
+
    </div>
 
 <div class="new-pharmabox">New pharmacies </div>
