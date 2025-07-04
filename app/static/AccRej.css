@@ -71,15 +71,19 @@ p{
 
 .actions {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* spacing between buttons */
 }
+
 
 .accept-btn, .reject-btn {
   padding: 8px 16px;
-  margin-right: 10px;
   border: none;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+
 }
 
 .accept-btn:hover, .reject-btn:hover{
