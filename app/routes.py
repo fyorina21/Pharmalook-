@@ -96,17 +96,17 @@ def status_page():
 
     if not email:
         flash('No email provided.')
-        return redirect(url_for('routes_bp.signup'))
+        return redirect(url_for('routes_bp.psignup'))
 
     pharmacist = Pharmacist.query.filter_by(email=email).first()
 
     if not pharmacist:
         flash('Pharmacist not found.')
-        return redirect(url_for('routes_bp.signup'))
+        return redirect(url_for('routes_bp.psignup'))
 
-    return render_template('status.html', pharmacy_name=pharmacist.name,
-                           request_date=pharmacist.created_at.strftime('%Y-%m-%d'),
-                           status=pharmacist.status)
+    # ✅ FIXED: Pass the whole object, not just .name
+    return render_template('status.html', pharmacist=pharmacist)
+
 
 @routes_bp.route('/inventory')
 def inventory_page():
