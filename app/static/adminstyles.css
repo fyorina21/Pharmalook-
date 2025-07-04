@@ -128,3 +128,14 @@ td:last-child, th:last-child {
   text-decoration: none;
   color: inherit;
 }
+
+.notification-badge {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  background-color: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}

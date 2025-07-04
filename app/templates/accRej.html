@@ -14,29 +14,29 @@
     </nav>
    </div>
 
-<div class="new-pharmabox">New pharmacies
-</div>
-  {% if pharmacist %} 
-   <div class="viewer"> 
-      <div class="pharmacy-request">
-      {% for pharmacy in pharmacist %}
-        <p><strong> &#9877; {{ pharmacy.name }} </strong> </p>
-        <p style="font-size: 80%;"> &#x1F4CD;
-          {{ pharmacy.location }}
-         </p>
-      {% endfor %}
+<div class="new-pharmabox">New pharmacies </div>
+  {% if pharmacist %}
+    {% for pharmacy in pharmacist %}
+      <div class="viewer">
+        <div class="pharmacy-request">
+          <p><strong> &#9877; {{ pharmacy.name }} </strong></p>
+          <p style="font-size: 80%;"> &#x1F4CD; {{ pharmacy.location }}</p>
+        </div>   
 
-
-      </div>   
-      <div class="actions">
-        <button class="accept-btn">Accept</button>
-        <button class="reject-btn">Reject</button>
+        <div class="actions">
+          <form action="{{ url_for('routes_bp.approve_pharmacy', pharmacy_id=pharmacy.id) }}" method="POST">
+            <button type="submit" class="accept-btn">Accept</button>
+          </form>
+          <form action="{{ url_for('routes_bp.reject_pharmacy', pharmacy_id=pharmacy.id) }}" method="POST">
+            <button type="submit" class="reject-btn">Reject</button>
+          </form>
+        </div>
       </div>
+    {% endfor %}
   {% else %}
-      <h1> No registered pharmacies yet </h1>
+    <div class="viewer">
+      <h1>No registered pharmacies yet</h1>
     </div>
   {% endif %}
- 
-
 </body>
 </html>
