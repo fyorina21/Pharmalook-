@@ -16,7 +16,11 @@
         <h2>{{ session.get('username') }}</h2>
         {% else %}
         <a href="{{ url_for('auth_bp.login') }}"><button class="nav-btn" id="loginBtn">Login</button></a>
+<<<<<<< HEAD
+        <a href="{{ url_for('routes_bp.who') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+=======
         <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+>>>>>>> 2e5175dec2eb79e5986c0a13e896e20eaec6473f
         {% endif %}
       </div>
 
