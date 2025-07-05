@@ -24,7 +24,6 @@ def login():
             print("Admin logged in successfully")
             return redirect(url_for("routes_bp.admin_dashboard"))
 
-
         user = Users.query.filter_by(email=email).first()
         if user and user.check_password(password):
             session['id'] = user.id

@@ -135,7 +135,7 @@ h1 {
 .back-arrow-icon {
   position: absolute;
   left: 20px;
-  font-size: 22px;
+  font-size: 30px;
   color: #4CAF50;
   animation: floatArrow 2s infinite;
   text-decoration: none;
@@ -145,6 +145,7 @@ h1 {
 .back-arrow-icon:hover {
   color: #2e7d32;
   transform: scale(1.2);
+  
 }
 
 @keyframes floatArrow {
