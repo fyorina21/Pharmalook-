@@ -25,9 +25,11 @@
 
 
   <div class="main">
+    
     {% if medicines and medicines|length > 0 %}
       <div id="pharmacy-list">
         <ul>
+          
           {% for med in medicines %}
             <li class="medicine-item">
               <strong>{{ med.Medicinename }}</strong><br />

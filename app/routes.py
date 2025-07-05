@@ -51,13 +51,10 @@ def home():
 def user_homepage():
     # Get search query from URL parameters (default to empty string if none)
     search_query = request.args.get("q", "").strip()
-    results = []
+    results = None
     if search_query:
         # Search for medicines by name (case-insensitive)
         results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
-    else:
-        # If no search, show all medicines
-        results = Medicine.query.all()
     return render_template(
         "look.html",
         medicines=results,
@@ -96,14 +93,11 @@ def pdashboard():
 @routes_bp.route('/medicine')
 def medicine():
     medicines = Medicine.query.all()
-    return render_template('medicine.html', medicines=medicines)
+    return render_template('medicine.html', medicines=medicines)    
 
 
 
 
-@routes_bp.route('/pdashboard')
-def pdashboard():
-    return render_template('pdashboard.html')
 
 
 # @routes_bp.route('/medicines')
