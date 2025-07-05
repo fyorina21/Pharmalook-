@@ -161,15 +161,15 @@ def delete_pharmacy(pharmacy_id):
 
 
 
-@routes_bp.route('/status2')
-def status():
-    pharmacist = Pharmacist.query.get(session['id'])
-    if pharmacist:
-        return render_template("status.html", pharmacist=pharmacist)
+# @routes_bp.route('/status')
+# def status():
+#     pharmacist = Pharmacist.query.get(session['id'])
+#     if pharmacist:
+#         return render_template("status.html", pharmacist=pharmacist)
     
-    else:
-        flash("Pharmacist not found.")
-        return redirect(url_for("auth_bp.login"))
+#     else:
+#         flash("Pharmacist not found.")
+        # return redirect(url_for("auth_bp.login"))
 
 @routes_bp.route('/admin/requests')
 def admin_requests():
