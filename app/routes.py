@@ -129,8 +129,7 @@ def pdashboard():
     return render_template('pdashboard.html')
 
 
-<<<<<<< HEAD
-=======
+
 # @routes_bp.route('/medicines')
 # def medicine_list():
 #     medicines = Medicine.query.all()
@@ -147,7 +146,6 @@ def pdashboard():
 #         description = request.form.get("description")
 
 
-<<<<<<< HEAD
 @routes_bp.route("/who")
 def who():
     return render_template("who_are_you.html")
@@ -164,7 +162,6 @@ def view_pending():
 def search():
     result=""
     return render_template("search.html",result=result)
-=======
 
 # @routes_bp.route("/search")
 # def search():
@@ -177,14 +174,14 @@ def search():
 
 #     return render_template("search.html", result=result)
 
->>>>>>> 2b3d141cf3d5e6c030b213c1166b57d8e218939b
+
 
 @routes_bp.route('/accRej')
 def accept_reject():
     pending_pharmacists = Pharmacist.query.filter_by(admin_approved=False).all()
     print("PENDING PHARMACISTS:", pending_pharmacists)  # DEBUG print
 
-    return render_template("accRej.html", pharmacist=pending_pharmacists)
+    return render_template("accRej.html", pharmacists=pending_pharmacists)
 
 
 
@@ -219,12 +216,4 @@ def status():
     else:
         flash("Pharmacist not found.")
         return redirect(url_for("auth_bp.login"))
-<<<<<<< HEAD
 
-@routes_bp.route('/admin/requests')
-def admin_requests():
-    pending_pharmacies = Pharmacist.query.filter_by(admin_approved=False).all()
-    return render_template('admin_requests.html', pharmacies=pending_pharmacies)
-=======
->>>>>>> 2e5175dec2eb79e5986c0a13e896e20eaec6473f
->>>>>>> 2b3d141cf3d5e6c030b213c1166b57d8e218939b
