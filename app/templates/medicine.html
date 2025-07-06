@@ -74,10 +74,10 @@
         <tbody>
             {% for med in medicines %}
             <tr>
-                <td>{{ med.name }}</td>
-                <td>{{ med.price }}</td>
-                <td>{{ med.dosage }}</td>
-                <td>${{ med.description }}</td>
+                <td>{{ med.Medicinename }}</td>
+                <td>${{ med.price }}</td>
+                <td>{{ med.Dosage }}</td>
+                <td>{{ med.medicinedescription }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -71,15 +71,19 @@ p{
 
 .actions {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* spacing between buttons */
 }
+
 
 .accept-btn, .reject-btn {
   padding: 8px 16px;
-  margin-right: 10px;
   border: none;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+
 }
 
 .accept-btn:hover, .reject-btn:hover{
@@ -106,8 +110,55 @@ background-color: #fb8686;
 }
 
 
+h1 {
+  margin-top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
+
+.nav_acc_rej {
+  position: relative;
+  background-color: white;
+  height: 5vh;
+  width: 98%;
+  border-radius: 10px;
+  border: 1px solid rgb(215, 255, 213);
+  box-shadow: 0px 0px 10px rgb(215, 255, 213);
+  display: flex;
+  justify-content: center; /* center logo */
+  align-items: center;
+}
+
+.back-arrow-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 22px;
+  color: #4CAF50;
+  animation: floatArrow 2s infinite;
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.back-arrow-icon:hover {
+  color: #2e7d32;
+  transform: scale(1.2);
+}
+
+@keyframes floatArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.nav-logo {
+  height: 100px;
+}
 
 
 
