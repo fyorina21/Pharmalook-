@@ -80,9 +80,9 @@ def user_homepage():
     if search_query:
         # Search for medicines by name (case-insensitive)
         results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
-    else:
-        # If no search, show all medicines
-        results = Medicine.query.all()
+        
+   
+   
     return render_template(
         "look.html",
         medicines=results,
@@ -119,14 +119,11 @@ def inventory_page():
 @routes_bp.route('/medicine')
 def medicine():
     medicines = Medicine.query.all()
-    return render_template('medicine.html', medicines=medicines)
+    return render_template('medicine.html', medicines=medicines)    
 
 
 
 
-@routes_bp.route('/pdashboard')
-def pdashboard():
-    return render_template('pdashboard.html')
 
 
 
