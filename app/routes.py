@@ -51,10 +51,13 @@ def home():
 def user_homepage():
     # Get search query from URL parameters (default to empty string if none)
     search_query = request.args.get("q", "").strip()
-    results = None
+    results = []
     if search_query:
         # Search for medicines by name (case-insensitive)
         results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
+        
+   
+   
     return render_template(
         "look.html",
         medicines=results,
