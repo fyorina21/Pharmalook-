@@ -5,29 +5,54 @@ from sqlalchemy import delete
 
 routes_bp = Blueprint("routes_bp", __name__)
 
-# @routes_bp.route('/psignup', methods=['GET', 'POST'])
-# def signup():
-#     if request.method == 'POST':
-#         name = request.form.get('name')
-#         location = request.form.get('location')
-#         email = request.form.get('email')
-#         password = request.form.get('password')
-#         confirm = request.form.get('confirmPassword')
+@routes_bp.route('/psignup', methods=['GET', 'POST'])
+def psignup():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        location = request.form.get('location')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm = request.form.get('confirmPassword')
 
-#         if password != confirm:
-#             flash('Passwords do not match.')
-#             return redirect(url_for('routes_bp.signup'))
-#         if Pharmacist.query.filter_by(email=email).first():
-#             flash('Email already exists.')
-#             return redirect(url_for('routes_bp.psignup'))
+        if password != confirm:
+            flash('Passwords do not match.')
+            return redirect(url_for('routes_bp.psignup'))
 
-#         pharmacist = Pharmacist(name=name, location=location, email=email)
-#         pharmacist.set_password(password)
-#         db.session.add(pharmacist)
-#         db.session.commit()
-#         return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
-    
-#     return render_template('psignup.html')
+        if Pharmacist.query.filter_by(email=email).first():
+            flash('Email already exists.')
+            return redirect(url_for('routes_bp.psignup'))
+
+        pharmacist = Pharmacist(name=name, location=location, email=email)
+        pharmacist.set_password(password)
+        pharmacist.status = 'pending'
+        pharmacist.admin_approved = False
+
+        db.session.add(pharmacist)
+        db.session.commit()
+        flash("Signup complete! Wait for admin approval.")
+        
+        return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
+
+    return render_template('psignup.html')
+
+
+
+@routes_bp.route('/approve/<int:pharmacy_id>', methods=['POST'])
+def approve_pharmacy(pharmacy_id):
+    pharmacist = Pharmacist.query.get(pharmacy_id)
+    if pharmacist:
+        pharmacist.admin_approved = True
+        pharmacist.status = 'approved'
+        db.session.commit()
+    return redirect(url_for('routes_bp.accept_reject'))
+
+@routes_bp.route('/reject/<int:pharmacy_id>', methods=['POST'])
+def reject_pharmacy(pharmacy_id):
+    pharmacist = Pharmacist.query.get(pharmacy_id)
+    if pharmacist:
+        db.session.delete(pharmacist)
+        db.session.commit()
+    return redirect(url_for('routes_bp.accept_reject'))
 
 
 
@@ -55,9 +80,9 @@ def user_homepage():
     if search_query:
         # Search for medicines by name (case-insensitive)
         results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
-    else:
-        # If no search, show all medicines
-        results = Medicine.query.all()
+        
+   
+   
     return render_template(
         "look.html",
         medicines=results,
@@ -71,32 +96,31 @@ def status_page():
 
     if not email:
         flash('No email provided.')
-        return redirect(url_for('routes_bp.signup'))
+        return redirect(url_for('routes_bp.psignup'))
 
     pharmacist = Pharmacist.query.filter_by(email=email).first()
 
     if not pharmacist:
         flash('Pharmacist not found.')
-        return redirect(url_for('routes_bp.signup'))
+        return redirect(url_for('routes_bp.psignup'))
 
-    return render_template('status.html', pharmacy_name=pharmacist.name,
-                           request_date=pharmacist.created_at.strftime('%Y-%m-%d'),
-                           status=pharmacist.status)
+    # ✅ FIXED: Pass the whole object, not just .name
+    return render_template('status.html', pharmacist=pharmacist)
+
 
 @routes_bp.route('/inventory')
 def inventory_page():
     medicines = Medicine.query.all()
     return render_template('inventory.html', medicines=medicines)
 
-@routes_bp.route('/pdashboard')
-def pdashboard():
-    return render_template('pdashboard.html')
+
 
 
 @routes_bp.route('/medicine')
 def medicine():
     medicines = Medicine.query.all()
-    return render_template('medicine.html', medicines=medicines)
+    return render_template('medicine.html', medicines=medicines)    
+
 
 
 
@@ -119,6 +143,22 @@ def medicine():
 #         description = request.form.get("description")
 
 
+@routes_bp.route("/who")
+def who():
+    return render_template("who_are_you.html")
+
+@routes_bp.route("/admin/pending", methods=["GET"])
+
+def view_pending():
+    pharmacists = Pharmacist.query.filter_by(status='pending').all()
+    return render_template("accRej.html", pharmacists=pharmacists)
+
+
+
+@routes_bp.route("/search<query>")
+def search():
+    result=""
+    return render_template("search.html",result=result)
 
 # @routes_bp.route("/search")
 # def search():
@@ -132,36 +172,45 @@ def medicine():
 #     return render_template("search.html", result=result)
 
 
+
 @routes_bp.route('/accRej')
 def accept_reject():
-    return render_template("accRej.html")
+    pending_pharmacists = Pharmacist.query.filter_by(admin_approved=False).all()
+    print("PENDING PHARMACISTS:", pending_pharmacists)  # DEBUG print
+
+    return render_template("accRej.html", pharmacists=pending_pharmacists)
+
+
 
 @routes_bp.route('/who_are_you')
 def who_are_you():
     return render_template("who_are_you.html")
 
 @routes_bp.route('/admin-dashboard')
-def pharmacies():
-    # Query all pharmacists where is_accepted is True
+def admin_dashboard():  # <- Rename for clarity
     pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
-    
-    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+    pending_count = Pharmacist.query.filter_by(admin_approved=False).count()
+    return render_template("admin-dashboard.html", pharmacist=pharmacist, pending_count=pending_count)
+
 
 @routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
 def delete_pharmacy(pharmacy_id):
-    with db.connect() as conn:
-        stmt = delete(Pharmacist).where(Pharmacist.c.id == pharmacy_id)
-        conn.execute(stmt)
-        conn.commit()
-    return redirect(url_for('pharmacies'))
-
-
-@routes_bp.route('/status')
-def status():
-    pharmacist = Pharmacist.query.get(session['id'])
+    pharmacist = Pharmacist.query.get(pharmacy_id)
     if pharmacist:
-        return render_template("status.html", pharmacist=pharmacist)
+        db.session.delete(pharmacist)
+        db.session.commit()
+    return redirect(url_for('routes_bp.admin_dashboard'))
+ 
+
+
+
+# @routes_bp.route('/status')
+# def status():
+#     pharmacist = Pharmacist.query.get(session['id'])
+#     if pharmacist:
+#         return render_template("status.html", pharmacist=pharmacist)
     
-    else:
-        flash("Pharmacist not found.")
-        return redirect(url_for("auth_bp.login"))
+#     else:
+#         flash("Pharmacist not found.")
+        # return redirect(url_for("auth_bp.login"))
+

@@ -2,6 +2,9 @@ from flask import Blueprint,render_template,flash,request,redirect,session,url_f
 from .database import Users,db,Pharmacist, Medicine
 
 auth_bp = Blueprint("auth_bp", __name__)
+from .database import Pharmacist
+
+routes_bp = Blueprint("routes_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -157,6 +160,10 @@ def psignup():
     return render_template("psignup.html")
 
 
+@auth_bp.route("/admin/pending", methods=["GET"])
+def view_pending():
+    pending_list = Pharmacist.query.filter_by(status='pending').all()
+    return render_template("admin_pending.html", pharmacists=pending_list)
 
 @auth_bp.route("/logout")
 def logout():
