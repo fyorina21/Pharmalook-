@@ -16,7 +16,7 @@
         <h2>{{ session.get('username') }}</h2>
         {% else %}
         <a href="{{ url_for('auth_bp.login') }}"><button class="nav-btn" id="loginBtn">Login</button></a>
-        <a href="{{ url_for('auth_bp.signup') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+        <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
         {% endif %}
       </div>
 
@@ -28,7 +28,7 @@
         Whether you’re looking for a specific prescription drug or an over-the-counter medication,
         Pharmalook connects you to the closest pharmacy that has it in stock.
       </p>
-      <a href="{{ url_for('auth_bp.signup') }}"><button class="search-btn">Start Searching Now</button></a>
+      <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="search-btn">Start Searching Now</button></a>
     </div>
     <!-- Include: welcome text + "Start Searching Now" button -->
   </div>
@@ -144,7 +144,7 @@
       Skip the stress of visiting multiple pharmacies. Just tell us what medicine you need and where you are-PharmaLook
       finds it for you in seconds.
     </p>
-    <a href="{{ url_for('auth_bp.signup') }}"><button class="gt-button">Get started</button></a>
+    <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="gt-button">Get started</button></a>
   </div>
 
 
