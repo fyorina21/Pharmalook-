@@ -31,13 +31,14 @@ class Pharmacist(db.Model):
     location = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    admin_approved = db.Column(db.Boolean, default=False, nullable=False)
-    
-    status = db.Column(db.String(20), default='pending') 
+    admin_approved = db.Column(db.Boolean, default=False)  # pending if False
+    status = db.Column(db.String(20), default="pending")  # optional
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
+   
     def set_password(self, passwords):
         self.password = generate_password_hash(passwords)
 
     def check_password(self, passwords):
         return check_password_hash(self.password, passwords)
+

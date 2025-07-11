@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Approval Tracking Form</title>
+    <title>Pharmacist Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <style>
         /* Reset and base styles */
         body {
@@ -21,26 +22,29 @@
         }
 
         /* Header styles */
+
         .header-wrapper {
             display: flex;
-            justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 30px;
         }
 
         .logo-container {
-            height: 50px;
+            height: 120px;
             margin-bottom: 10px;
+            margin-right: 40px;
+            display: flex;
+            align-items: flex-start;
         }
 
         .logo {
-            height: 100px;
+            height: 120px;
             width: auto;
         }
 
         .page-title {
-            font-size: 20px;
-            margin: 5px 0 0 0;
+            font-size: 24px;
+            margin: 60px 0 0 0;
         }
 
         .back-link {
@@ -56,10 +60,11 @@
 
         /* Table styles */
         .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            /* Removed big white box styles, only center the table */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
         }
 
         table {
@@ -95,43 +100,38 @@
 </head>
 <body>
     <div class="container">
-        <div class="header-wrapper">
-            <div>
-                <div class="logo-container">
-                    <!-- Replace with your actual logo -->
-                    <img src="{{ url_for('static', filename='images/logo-bg.png') }}" alt="PharmaLook Logo" class="logo" width="220" height="auto">
-                </div>
-                <h2 class="page-title">Request Approval Tracking Form</h2>
-            </div>
-            <span class="back-link">→ back</span>
+        <a href="{{ url_for('auth_bp.psignup') }}" class="back-link" style="position: absolute; top: 30px; right: 40px; text-decoration: none;">&larr; Back</a>
+        <!-- Logo in the top left corner, perfectly aligned with the back link -->
+        <!-- Logo in the top left corner, matching psignup page position -->
+        <div style="position: absolute; top: -60px; left: 20px; z-index: 100; height: 210px; width: 210px; display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/logo-bg.png') }}" alt="PharmaLook Logo" style="height: 100%; width: 100%; object-fit: contain; display: block;">
         </div>
-        
-        <div class="table-container">
-            <table>
+        <div class="header-wrapper" style="margin-top: 60px;">
+            <h2 class="page-title" style="margin-left: 220px; text-decoration: underline;">Request Approval Tracking Form</h2>
+        </div>
+        <div class="table-container" style="margin-top: -30px;">
+            <table style="margin: 0 auto; width: 700px;">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Requested date</th>
-                        <th>Status</th>
+                        <th style="text-align: center;">Name</th>
+                        <th style="text-align: center;">Requested date</th>
+                        <th style="text-align: center;">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <tbody>
-    <tr>
-        <td>{{ pharmacy_name }}</td>
-        <td>{{ request_date }}</td>
-        <td>
-            {% if status == 'pending' %}
-                <span class="status-pending">pending...</span>
-            {% elif status == 'accepted' %}
-                <script>window.location.href = "{{ url_for('auth_bp.login') }}";</script>
-            {% elif status == 'rejected' %}
-                <span style="color: red; font-weight: 500;">rejected</span>
-            {% endif %}
-                   </td>
-                  </tr>
-
+                        <td style="text-align: center;">{{ pharmacist.name }}</td>
+                        <td style="text-align: center;">{{ pharmacist.created_at }}</td>
+                        <td style="text-align: center;">
+                            {% if pharmacist.status == 'pending' %}
+                                <span class="status-pending">pending...</span>
+                            {% elif pharmacist.status == 'accepted' %}
+                                <script>window.location.href = "{{ url_for('auth_bp.login') }}";</script>
+                            {% elif pharmacist.status == 'rejected' %}
+                                <span style="color: red; font-weight: 500;">rejected</span>
+                            {% endif %}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -10,13 +10,22 @@
     </head>
     <body class="admin-body">
       
-        <div class="navbar">
-        <img src="static\images\logo.png" class="logo">
-        <div class="nav-icons">
-            <a href="{{ url_for('routes_bp.accept_reject') }}" class="icon-link"><i class="fas fa-bell"></i></a>
-            <i class="fas fa-clock"></i>
+<div class="navbar">
+
+    <img src="static\images\logo.png" class="logo">
+    <div class="nav-icons">
+        <div class="bell-wrapper">
+            <a href="{{ url_for('routes_bp.accept_reject') }}" class="icon-link">
+                <i class="fas fa-bell"></i>
+               {% if pending_count > 0 %}
+                <span class="notification-badge">{{ pending_count }}</span>
+            {% endif %}
+            </a>
         </div>
-      </div>
+        <i class="fas fa-clock"></i>
+    </div>
+
+</div>
 
       
       <div class="admin-container">
@@ -36,14 +45,18 @@
                     {% for pharmacy in pharmacist %}
                     <tr>
                         <td>{{ pharmacy.name }}</td>
-                        <td class="remove-btn">Remove</td>
+                        <td class="remove-td">
+                            <form action="{{ url_for('routes_bp.delete_pharmacy', pharmacy_id=pharmacy.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             {% else %}
                 <tbody>
                     <tr>
-                        <td colspan="2">No registered pharmacies found.</td>
+                        <td style="color: rgb(143, 143, 143); text-align: center; " colspan="2">No registered pharmacies found.</td>
                     </tr>
                 </tbody>
             {% endif %}

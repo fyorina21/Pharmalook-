@@ -1,10 +1,10 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
-from .database import Users,db
-from app.database import Medicine, Pharmacist
-
-
+from .database import Users,db,Pharmacist, Medicine
 
 auth_bp = Blueprint("auth_bp", __name__)
+from .database import Pharmacist
+
+routes_bp = Blueprint("routes_bp", __name__)
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -24,25 +24,76 @@ def login():
             print("Admin logged in successfully")
             return redirect(url_for("routes_bp.pharmacies"))
 
-
         user = Users.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            session['id'] = user.id
+            session['username'] = user.name
+            session['role'] = 'user'
+            print("User logged in successfully")
+            return redirect(url_for("routes_bp.search"))
 
-        if not user:
-            print("No account found with this email")
-            return render_template("login.html", error="Invalid email or password")
 
-        if not user.check_password(password):
-            print("Invalid password")
-            return render_template("login.html", error="Invalid email or password")
+        pharmacist = Pharmacist.query.filter_by(email=email).first()
+        if pharmacist and pharmacist.check_password(password):
+                
+            if pharmacist.status == 'rejected':
+                flash("Your pharmacy registration has been rejected. Please contact admin for details.")
+                return redirect(url_for("auth_bp.login"))
+        
+            elif pharmacist.status == 'pending':
+                flash("Your pharmacy registration is still pending approval. Please wait.")
+                return redirect(url_for("routes_bp.status"))
 
-        session['id'] = user.id
-        session['username'] = user.name
+            elif pharmacist.admin_approved:
+                if pharmacist.status == 'pending':
+                    pharmacist.status = 'accepted'
+                    db.session.commit()
 
-        print("Logged in successfully")
-        return redirect(url_for("routes_bp.search"))
-
+                session['id'] = pharmacist.id
+                session['username'] = pharmacist.name
+                session['role'] = 'pharmacist'
+                print("Pharmacist logged in successfully")
+                return redirect(url_for("routes_bp.pdashboard")) 
+            
+        flash("Invalid email or password. Please try again.")
+        return redirect(url_for("auth_bp.login"))
+               
     return render_template("login.html")
 
+
+
+# @auth_bp.route("/psignup", methods=["GET", "POST"])
+# def psignup():
+#     if request.method == "POST":
+#         name = request.form.get("name")
+#         location = request.form.get("location")
+#         email = request.form.get("email")
+#         password = request.form.get("password")
+
+#         user = Pharmacist.query.filter_by(email=email).first()
+#         if user:
+#             print("User exists with this email. Try logging in.", "error")
+#             return redirect(url_for("auth_bp.psignup"))
+
+#         pharmacist = Pharmacist(name=name,location=location, email=email)
+#         pharmacist.set_password(password)
+#         db.session.add(pharmacist)
+#         db.session.commit()
+
+
+#         if user:
+#             session['id'] = user.id
+#             session['username'] = user.name
+#             flash("Registered successfully", "success")
+#             # maybe redirect or return success
+            
+#         else:
+#             flash("User not found. Please check your email or sign up.")
+#             return redirect(url_for("auth_bp.psignup"))  # or wherever your signup route is
+
+#         return redirect(url_for("routes_bp.search"))
+#     print("error")
+#     return render_template("psignup.html")
 
 
 @auth_bp.route("/signup", methods=["GET", "POST"])
@@ -68,6 +119,7 @@ def signup():
             session['id'] = user.id
             session['username'] = user.name
             flash("Registered successfully", "success")
+            return redirect(url_for('pdashboard'))
             # maybe redirect or return success
             
         else:
@@ -94,28 +146,29 @@ def psignup():
             return redirect(url_for("auth_bp.psignup"))
 
         # Create a new pharmacist user
-        new_user = Pharmacist(name=name, location=location, email=email, user_type="pharmacist")
+        new_user = Pharmacist(name=name, location=location, email=email)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
 
         session['id'] = new_user.id
         session['username'] = new_user.name
-        session['user_type'] = new_user.user_type
 
         flash("Pharmacist registered successfully", "success")
-        return redirect(url_for("routes_bp.home"))
+        return redirect(url_for("auth_bp.login"))
 
     return render_template("psignup.html")
 
 
+@auth_bp.route("/admin/pending", methods=["GET"])
+def view_pending():
+    pending_list = Pharmacist.query.filter_by(status='pending').all()
+    return render_template("admin_pending.html", pharmacists=pending_list)
 
 @auth_bp.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for('routes_bp.home')) 
-
-
 
 
 # @auth_bp.route("/add-medicine", methods=["POST"])
