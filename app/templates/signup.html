@@ -45,7 +45,14 @@
       <input type="password" id="confirmPassword" name="confirmPassword" required />
       </div>
 
-      <button type="submit">Sign Up</button>
+
+  <a href="{{ url_for('routes_bp.user_search') }}"><button type="button">Sign Up</button></a>
+
+      <!-- <form action="{{ url_for('routes_bp.user_search') }}" method="POST"><button type="submit">Sign Up</button></form> -->
+<!-- 
+      <a href="{{ url_for('routes_bp.user_search') }}"><button type="submit">Sign Up</button></a>
+      <a href="{{ url_for('routes_bp.user_search') }}"><button type="button" class="login-btn">Login</button></a> -->
+
 
       <p class="signin-link">Already have an account? <a href="{{ url_for('auth_bp.login') }}">Sign in</a></p>
     </form>

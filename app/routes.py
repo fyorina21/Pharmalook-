@@ -88,6 +88,10 @@ def medicine_list():
 #         dosage = request.form.get("dosage")
 #         description = request.form.get("description")
 
+@routes_bp.route('/user_search')
+def user_search():
+    return render_template('user_search.html')
+
 
 @routes_bp.route("/search")
 def search():
@@ -113,9 +117,6 @@ def who_are_you():
 @routes_bp.route('/admin-dashboard')
 def pharmacies():
     # Query all pharmacists where is_accepted is True
-    pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
-    
-    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+    pharmacists = Pharmacist.query.filter_by(admin_approved=True).all()
 
-
-
+    return render_template("admin-dashboard.html", pharmacists=pharmacists)
