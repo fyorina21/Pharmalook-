@@ -31,7 +31,7 @@ def psignup():
         db.session.commit()
         flash("Signup complete! Wait for admin approval.")
         
-        return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
+        return redirect(url_for('routes_bp.status', email=pharmacist.email))
 
     return render_template('psignup.html')
 
@@ -90,7 +90,7 @@ def user_homepage():
     )
 
 
-@routes_bp.route('/status')
+@routes_bp.route('/status', endpoint='status')
 def status_page():
     email = request.args.get('email')
 
@@ -163,6 +163,10 @@ def view_pending():
 def search():
     result=""
     return render_template("search.html",result=result)
+
+@routes_bp.route("/pdashboard")
+def pdashboard():
+    return render_template("pdashboard.html")
 
 # @routes_bp.route("/search")
 # def search():
