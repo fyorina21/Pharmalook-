@@ -23,6 +23,14 @@ class Medicine(db.Model):
     price= db.Column(db.Float, nullable=False)
     Dosage = db.Column(db.String(100), nullable=False)
     medicinedescription= db.Column(db.String(255), nullable=False)
+    pharmacist_id = db.Column(
+    db.Integer,
+    db.ForeignKey('pharmacist.id', name='fk_medicine_pharmacist_id'),
+    nullable=False # allow NULL for migration
+)
+pharmacist = db.relationship('Pharmacist', backref='medicines')
+
+
 
 
 class Pharmacist(db.Model):
