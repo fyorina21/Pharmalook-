@@ -142,6 +142,10 @@ def medicine():
 #         dosage = request.form.get("dosage")
 #         description = request.form.get("description")
 
+@routes_bp.route('/user_search')
+def user_search():
+    return render_template('user_search.html')
+
 
 @routes_bp.route("/who")
 def who():
@@ -191,30 +195,11 @@ def who_are_you():
     return render_template("who_are_you.html")
 
 @routes_bp.route('/admin-dashboard')
-def admin_dashboard():  # <- Rename for clarity
+def pharmacies():
+    # Query all pharmacists where is_accepted is True
     pharmacist = Pharmacist.query.filter_by(admin_approved=True).all()
-    pending_count = Pharmacist.query.filter_by(admin_approved=False).count()
-    return render_template("admin-dashboard.html", pharmacist=pharmacist, pending_count=pending_count)
-
-
-@routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
-def delete_pharmacy(pharmacy_id):
-    pharmacist = Pharmacist.query.get(pharmacy_id)
-    if pharmacist:
-        db.session.delete(pharmacist)
-        db.session.commit()
-    return redirect(url_for('routes_bp.admin_dashboard'))
- 
-
-
-
-# @routes_bp.route('/status')
-# def status():
-#     pharmacist = Pharmacist.query.get(session['id'])
-#     if pharmacist:
-#         return render_template("status.html", pharmacist=pharmacist)
     
-#     else:
-#         flash("Pharmacist not found.")
-        # return redirect(url_for("auth_bp.login"))
+    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+
+
 

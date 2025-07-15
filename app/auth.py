@@ -262,6 +262,3 @@ def remove_medicine():
         flash("Medicine removed successfully.", "success")
 
     return redirect(url_for("routes_bp.pdashboard"))
-
-
-
