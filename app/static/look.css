@@ -142,3 +142,17 @@ header h1 {
 .no-results{
   background: red;
 }
+.medicine-card {
+  background-color: #ffffff;
+  border: 1px solid #c5ebc5;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  color: #000000;
+  font-size: 16px;
+  list-style-type: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  width: 100%;
+  max-width: 900px;
+}

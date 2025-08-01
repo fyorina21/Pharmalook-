@@ -28,20 +28,20 @@
     
     {% if medicines and medicines|length > 0 %}
       <div id="pharmacy-list">
-        <ul>
-          
+        
+        <div class="pharmacy-list">  
           {% for med in medicines %}
-            <li class="medicine-item">
+            <div class="medicine-card">
               <strong>{{ med.Medicinename }}</strong><br />
               <span><strong>Dosage:</strong> {{ med.Dosage }}</span><br />
               <span><strong>Price:</strong> ${{ med.price }}</span><br />
-              <span><strong>Description:</strong> {{ med.medicinedescription }}</span>
+              <span><strong>Description:</strong> {{ med.medicinedescription }}</span><br />
               <span><strong>Pharmacy:</strong> {{ med.pharmacyname }}</span><br />
               <span><strong>Location:</strong> {{ med.location }}</span>
 
-            </li>
+            </div>
           {% endfor %}
-        </ul>
+          </div>
       </div>
     {% elif query %}
     <div class="box">
