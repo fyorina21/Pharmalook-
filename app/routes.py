@@ -31,7 +31,7 @@ def psignup():
         db.session.commit()
         flash("Signup complete! Wait for admin approval.")
         
-        return redirect(url_for('routes_bp.status_page', email=pharmacist.email))
+        return redirect(url_for('routes_bp.status', email=pharmacist.email))
 
     return render_template('psignup.html')
 
@@ -76,12 +76,19 @@ def home():
 def user_homepage():
     # Get search query from URL parameters (default to empty string if none)
     search_query = request.args.get("q", "").strip()
-    results = []
+    results = [] 
     if search_query:
-        # Search for medicines by name (case-insensitive)
-        results = Medicine.query.filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
-        
-   
+        # JOIN Medicine with Pharmacist to get location and pharmacy name
+        results = db.session.query(
+            Medicine.Medicinename,
+            Medicine.Dosage,
+            Medicine.price,
+            Medicine.medicinedescription,
+            Pharmacist.name.label("pharmacyname"),
+            Pharmacist.location
+        ).join(Pharmacist, Medicine.pharmacist_id == Pharmacist.id
+        ).filter(Medicine.Medicinename.ilike(f"%{search_query}%")).all()
+
    
     return render_template(
         "look.html",
@@ -99,7 +106,7 @@ def user_search():
     return render_template('user_search.html')
 
 
-@routes_bp.route('/status')
+@routes_bp.route('/status', endpoint='status')
 def status_page():
     email = request.args.get('email')
 
@@ -168,6 +175,10 @@ def view_pending():
 def search():
     result=""
     return render_template("search.html",result=result)
+
+@routes_bp.route("/pdashboard")
+def pdashboard():
+    return render_template("pdashboard.html")
 
 # @routes_bp.route("/search")
 # def search():

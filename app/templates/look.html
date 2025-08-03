@@ -21,30 +21,38 @@
       />
       <button type="submit" style="display: none;"></button> 
     </form>
+ 
+ 
 
-    <!-- Back to Search button -->
-    <div style="margin-top: 10px;">
-      <a href="{{ url_for('routes_bp.user_search') }}" 
-         class="back-button" 
-         style="text-decoration: none; color: green; font-weight: bold;">
-        ← Back to Search Page
-      </a>
-    </div>
   </header>
 
   <div class="main">
     {% if medicines and medicines|length > 0 %}
       <div id="pharmacy-list">
-        <ul>
+        
+        <div class="pharmacy-list">  
           {% for med in medicines %}
-            <li class="medicine-item">
+            <div class="medicine-card">
               <strong>{{ med.Medicinename }}</strong><br />
               <span><strong>Dosage:</strong> {{ med.Dosage }}</span><br />
               <span><strong>Price:</strong> ${{ med.price }}</span><br />
-              <span><strong>Description:</strong> {{ med.medicinedescription }}</span>
-            </li>
+              <span><strong>Description:</strong> {{ med.medicinedescription }}</span><br />
+              <span><strong>Pharmacy:</strong> {{ med.pharmacyname }}</span><br />
+     <form id="search-form" method="get" action="{{ url_for('routes_bp.user_homepage') }}">
+           <input 
+             type="text" 
+             id="search-bar" 
+             name="q" 
+             placeholder="🔍 Search for medicine" 
+             class="search-bar" 
+             value="{{ query | default('') }}" 
+           />
+           <button type="submit" style="display: none;"></button> 
+         </form>         <span><strong>Location:</strong> {{ med.location }}</span>
+
+            </div>
           {% endfor %}
-        </ul>
+          </div>
       </div>
     {% elif query %}
       <div class="box">
