@@ -30,8 +30,7 @@
                 <input type="checkbox" id="remember-me" name="rememberMe">
                 <label for="remember-me">Remember me</label>
                  </div>
-            
-            <a href="{{ url_for('routes_bp.user_search') }}"><button type="button" class="login-btn">Login</button></a>
+            <button type="submit" id="loginBtn" class="login-btn">Login</button>
                 </form>
             <p class="signup-text">Don't have an account?<a href="{{ url_for('auth_bp.signup') }}">Sign up</a></p>	
   </div>
@@ -54,4 +53,3 @@
         <!-- <script defer src="{{ url_for('static', filename='script.js') }}"></script> -->
 </body>
 </html>
-
