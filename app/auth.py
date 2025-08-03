@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
 from .database import Users,db,Pharmacist, Medicine
-from flask_login import current_user, login_required
+# from flask_login import current_user, login_required
 
 
 auth_bp = Blueprint("auth_bp", __name__)

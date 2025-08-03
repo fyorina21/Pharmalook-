@@ -166,25 +166,25 @@ def view_pending():
 
 
 
-@routes_bp.route("/search<query>")
-def search():
-    result=""
-    return render_template("search.html",result=result)
+# @routes_bp.route("/search<query>")
+# def search():
+#     result=""
+#     return render_template("look.html",result=result)
 
 @routes_bp.route("/pdashboard")
 def pdashboard():
     return render_template("pdashboard.html")
 
-# @routes_bp.route("/search")
-# def search():
-#     query = request.args.get("query")  # gets ?query=value from URL
-#     result = []
+@routes_bp.route("/search")
+def search():
+    query = request.args.get("query")  # gets ?query=value from URL
+    result = []
 
-#     if query:
-#         # Example SQLAlchemy model query
-#         result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
+    if query:
+        # Example SQLAlchemy model query
+        result = Medicine.query.filter(Medicine.name.ilike(f"%{query}%")).all()
 
-#     return render_template("search.html", result=result)
+    return render_template("look.html", result=result)
 
 
 
