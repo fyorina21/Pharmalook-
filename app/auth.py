@@ -1,5 +1,7 @@
 from flask import Blueprint,render_template,flash,request,redirect,session,url_for
 from .database import Users,db,Pharmacist, Medicine
+from flask_login import current_user, login_required
+
 
 auth_bp = Blueprint("auth_bp", __name__)
 from .database import Pharmacist
@@ -199,6 +201,8 @@ def logout():
 #     return redirect(url_for("routes_bp.pdashboard"))
 
 
+
+
 @auth_bp.route("/add-medicine", methods=["POST"])
 def add_medicine():
     name = request.form.get("Medicinename")
@@ -206,24 +210,28 @@ def add_medicine():
     dosage = request.form.get("Dosage")
     description = request.form.get("medicinedescription")
 
-    # Check for required fields
     if not name or not price or not dosage or not description:
         flash("All fields are required.", "error")
         return redirect(url_for("routes_bp.pdashboard"))
 
-    # Check if the medicine already exists
-    existing = Medicine.query.filter_by(Medicinename=name).first()
+    pharmacist_id = session.get('id')
+    if not pharmacist_id:
+        flash("You must be logged in to add medicine.", "error")
+        return redirect(url_for("auth_bp.login"))
+
+    # ✅ Check for duplicates by pharmacist
+    existing = Medicine.query.filter_by(Medicinename=name, pharmacist_id=pharmacist_id).first()
     if existing:
-        flash("This medicine already exists. You cannot add it again.", "error")
+        flash("You already added this medicine.", "error")
         return redirect(url_for("routes_bp.pdashboard"))
 
-    # Add new medicine
     try:
         new_medicine = Medicine(
             Medicinename=name,
             price=float(price),
             Dosage=dosage,
-            medicinedescription=description
+            medicinedescription=description,
+            pharmacist_id=pharmacist_id
         )
         db.session.add(new_medicine)
         db.session.commit()
@@ -233,6 +241,7 @@ def add_medicine():
         flash(f"Error while adding medicine: {e}", "error")
 
     return redirect(url_for("routes_bp.pdashboard"))
+
 
 
 
@@ -253,6 +262,3 @@ def remove_medicine():
         flash("Medicine removed successfully.", "success")
 
     return redirect(url_for("routes_bp.pdashboard"))
-
-
-
