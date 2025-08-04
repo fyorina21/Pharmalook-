@@ -201,5 +201,8 @@ def pharmacies():
     
     return render_template("admin-dashboard.html", pharmacist=pharmacist)
 
+@routes_bp.route('/pprofile')
+def pprofile():
+    return render_template("pprofile.html")
 
 
