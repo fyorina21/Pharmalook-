@@ -230,6 +230,29 @@ def delete_pharmacy(pharmacy_id):
 #     if pharmacist:
 #         return render_template("status.html", pharmacist=pharmacist)
     
+    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+
+@routes_bp.route('/pprofile')
+def pprofile():
+    return render_template("pprofile.html")
+
+@routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
+def delete_pharmacy(pharmacy_id):
+    pharmacist = Pharmacist.query.get(pharmacy_id)
+    if pharmacist:
+        db.session.delete(pharmacist)
+        db.session.commit()
+    return redirect(url_for('routes_bp.admin_dashboard'))
+ 
+
+
+
+# @routes_bp.route('/status')
+# def status():
+#     pharmacist = Pharmacist.query.get(session['id'])
+#     if pharmacist:
+#         return render_template("status.html", pharmacist=pharmacist)
+    
 #     else:
 #         flash("Pharmacist not found.")
         # return redirect(url_for("auth_bp.login"))
