@@ -101,8 +101,20 @@ def user_search():
     if request.method == "POST":
         medication = request.form.get("medication")
         location = request.form.get("location")  # optional, not used now
-        print(f"Search medication submitted: {medication}")
-        return redirect(url_for('routes_bp.user_homepage', q=medication))
+
+        results = []
+        if medication:
+            results = db.session.query(
+                Medicine.Medicinename,
+                Medicine.Dosage,
+                Medicine.price,
+                Medicine.medicinedescription,
+                Pharmacist.name.label("pharmacyname"),
+                Pharmacist.location
+            ).join(Pharmacist, Medicine.pharmacist_id == Pharmacist.id
+            ).filter(Medicine.Medicinename.ilike(f"%{medication}%")).all()
+
+        return render_template("look.html", medicines=results, query=medication)
     return render_template('user_search.html')
 
 
