@@ -38,7 +38,17 @@
               <span><strong>Price:</strong> ${{ med.price }}</span><br />
               <span><strong>Description:</strong> {{ med.medicinedescription }}</span><br />
               <span><strong>Pharmacy:</strong> {{ med.pharmacyname }}</span><br />
+<<<<<<< HEAD
               <span><strong>Location:</strong> {{ med.location }}</span>
+=======
+     <form id="search-form" method="get" action="{{ url_for('routes_bp.user_homepage') }}">
+           <!-- <input type="text" id="search-bar" name="q" 
+             placeholder="🔍 Search for medicine" class="search-bar" 
+             value="{{ query | default('') }}" 
+           /> -->
+           <button type="submit" style="display: none;"></button> 
+         </form>         <span><strong>Location:</strong> {{ med.location }}</span>
+>>>>>>> 8d131134bf125766c6b530545d12978bff70e679
 
             </div>
           {% endfor %}

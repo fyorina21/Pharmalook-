@@ -183,10 +183,10 @@ def view_pending():
 
 
 
-@routes_bp.route("/search<query>")
+@routes_bp.route("/search")
 def search():
     result=""
-    return render_template("search.html",result=result)
+    return render_template("look.html",result=result)
 
 @routes_bp.route("/pdashboard")
 def pdashboard():
@@ -224,6 +224,29 @@ def admin_dashboard():  # <- Rename for clarity
     pending_count = Pharmacist.query.filter_by(admin_approved=False).count()
     return render_template("admin-dashboard.html", pharmacist=pharmacist, pending_count=pending_count)
 
+
+@routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
+def delete_pharmacy(pharmacy_id):
+    pharmacist = Pharmacist.query.get(pharmacy_id)
+    if pharmacist:
+        db.session.delete(pharmacist)
+        db.session.commit()
+    return redirect(url_for('routes_bp.admin_dashboard'))
+ 
+
+
+
+# @routes_bp.route('/status')
+# def status():
+#     pharmacist = Pharmacist.query.get(session['id'])
+#     if pharmacist:
+#         return render_template("status.html", pharmacist=pharmacist)
+    
+    return render_template("admin-dashboard.html", pharmacist=pharmacist)
+
+@routes_bp.route('/pprofile')
+def pprofile():
+    return render_template("pprofile.html")
 
 @routes_bp.route('/delete/<int:pharmacy_id>', methods=['POST'])
 def delete_pharmacy(pharmacy_id):

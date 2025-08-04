@@ -15,6 +15,15 @@
       <h2>Sign Up</h2>
       <p>Enter your information to create an account</p>
 
+
+       {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
       <div class="name-fields">
         <div class="field">
           <label for="firstName">First Name</label>
@@ -45,16 +54,18 @@
       <input type="password" id="confirmPassword" name="confirmPassword" required />
       </div>
 
+        <button type="submit">Sign Up</button>
+    <p class="signin-link">Already have an account? <a href="{{ url_for('auth_bp.login') }}">Sign in</a></p>
 
-  <a href="{{ url_for('routes_bp.user_search') }}"><button type="button">Sign Up</button></a>
+  <!-- <a href="{{ url_for('routes_bp.user_search') }}"><button type="button">Sign Up</button></a> -->
 
       <!-- <form action="{{ url_for('routes_bp.user_search') }}" method="POST"><button type="submit">Sign Up</button></form> -->
 <!-- 
-      <a href="{{ url_for('routes_bp.user_search') }}"><button type="submit">Sign Up</button></a>
-      <a href="{{ url_for('routes_bp.user_search') }}"><button type="button" class="login-btn">Login</button></a> -->
+      <a href="{{ url_for('routes_bp.user_search') }}"><button type="submit">Sign Up</button></a>-->
+      <!-- <a href="{{ url_for('routes_bp.user_search') }}"><button type="button" class="login-btn">Login</button></a>  -->
 
 
-      <p class="signin-link">Already have an account? <a href="{{ url_for('auth_bp.login') }}">Sign in</a></p>
+      <!-- <p class="signin-link">Already have an account? <a href="{{ url_for('auth_bp.login') }}">Sign in</a></p> -->
     </form>
     
   </div>

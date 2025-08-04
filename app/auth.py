@@ -13,7 +13,7 @@ def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-
+        # pending_count = Pharmacist.query.filter_by(status='pending').count()
         ADMIN_EMAIL = "admin@example.com"
         ADMIN_PASSWORD = "admin123"
 
@@ -35,6 +35,7 @@ def login():
             session['username'] = user.name
             session['role'] = 'user'
             print("User logged in successfully")
+            flash("Logged in successfully!", "success")
             return redirect(url_for("routes_bp.search"))
 
 
@@ -108,16 +109,33 @@ def signup():
         lastname = request.form.get("lastname")
         email = request.form.get("email")
         password = request.form.get("password")
+        # phone = request.form.get("phone")
+        confirm_password = request.form.get("confirmPassword")
+
+        if password != confirm_password:
+            flash("Passwords do not match. Try again.", "error")
+            return redirect(url_for("auth_bp.signup"))
+
 
         user = Users.query.filter_by(email=email).first()
         if user:
             print("User exists with this email. Try logging in.", "error")
+            flash("Email already registered. Please log in.", "error")
             return redirect(url_for("auth_bp.signup"))
 
         new_user = Users(name=name,lastname=lastname, email=email)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
+
+        # hashed_password = generate_password_hash(password)
+        # new_user = Users(name=name + " " + lastname, email=email, phone=phone, password=hashed_password)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Successfully registered! You can now log in.", "success")
+        return redirect(url_for("auth_bp.login"))
 
 
         if user:
@@ -143,6 +161,35 @@ def psignup():
         location = request.form.get("location")
         email = request.form.get("email")
         password = request.form.get("password")
+        # phone = request.form.get("phone")
+        confirm_password = request.form.get("confirmPassword")
+
+        if password != confirm_password:
+            flash("Passwords do not match. Try again.", "error")
+            return redirect(url_for("auth_bp.signup"))
+
+
+        new_pharmacist = Pharmacist.query.filter_by(email=email).first()
+        if new_pharmacist:
+            # print("User exists with this email. Try logging in.", "error")
+            flash("Email already registered. Please log in.", "error")
+            return redirect(url_for("auth_bp.signup"))
+
+        new_user = Pharmacist(name=name, location=location, email=email)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        # hashed_password = generate_password(password)
+        # new_pharmacist = Pharmacist(name=name + " " + lastname, email=email, phone=phone, password=hashed_password)
+
+        db.session.add(new_pharmacist)
+        db.session.commit()
+
+        flash("Successfully registered! You can now log in.", "success")
+        return redirect(url_for("auth_bp.login"))
+
+
 
         # Check if the email already exists
         user = Pharmacist.query.filter_by(email=email).first()
@@ -265,3 +312,4 @@ def remove_medicine():
         flash("Medicine removed successfully.", "success")
 
     return redirect(url_for("routes_bp.pdashboard"))
+
