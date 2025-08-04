@@ -26,9 +26,7 @@
 
   </header>
 
-
   <div class="main">
-    
     {% if medicines and medicines|length > 0 %}
       <div id="pharmacy-list">
         
@@ -53,11 +51,11 @@
           </div>
       </div>
     {% elif query %}
-    <div class="box">
-            <div class="container">
-              No reults found for"{{ query }}". Please try a different search.
+      <div class="box">
+        <div class="container">
+          No results found for "{{ query }}". Please try a different search.
+        </div>
       </div>
-    </div>
     {% endif %}
   </div>
 

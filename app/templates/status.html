@@ -101,8 +101,7 @@
 <body>
     <div class="container">
         <a href="{{ url_for('auth_bp.psignup') }}" class="back-link" style="position: absolute; top: 30px; right: 40px; text-decoration: none;">&larr; Back</a>
-        <!-- Logo in the top left corner, perfectly aligned with the back link -->
-        <!-- Logo in the top left corner, matching psignup page position -->
+       
         <div style="position: absolute; top: -60px; left: 20px; z-index: 100; height: 210px; width: 210px; display: flex; align-items: center;">
             <img src="{{ url_for('static', filename='images/logo-bg.png') }}" alt="PharmaLook Logo" style="height: 100%; width: 100%; object-fit: contain; display: block;">
         </div>
@@ -121,7 +120,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: center;">{{ pharmacist.name }}</td>
-                        <td style="text-align: center;">{{ pharmacist.created_at }}</td>
+                        <td style="text-align: center;">{{ pharmacist.created_at.srtftime('%Y-%m-%d') }}</td>
                         <td style="text-align: center;">
                             {% if pharmacist.status == 'pending' %}
                                 <span class="status-pending">pending...</span>

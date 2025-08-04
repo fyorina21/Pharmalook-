@@ -12,11 +12,21 @@
     <nav>
         <div class="logo">
             <img src="../static/images/pharmalook_logo-removebg-preview.png" alt="PHARMALOOK Logo">
+             
         </div>
+        <div class="profile">
+     <a href="{{ url_for('routes_bp.pprofile') }}">My Profile</a>
+
+
+
+
+    </div>
     </nav>
     
     <div class="search-bar"></div>
-    <div class="profile-icon"></div>
+    
+
+   
     </header>
 
     <main class="main-container">
@@ -40,16 +50,7 @@
             </form>
         </section>
 
-        <!-- <section class="remove-medicine">
-            <h2>Remove Medicine</h2>
-            <form>
-                <form action="/remove-medicine" method="POST">
-                 <input type="text" name="medicine_name" placeholder="Enter medicine name to remove">
-
-                
-                <button type="submit">Remove</button>
-            </form>
-        </section> -->
+      
         <section class="remove-medicine">
     <h2>Remove Medicine</h2>
     <form action="/remove-medicine" method="POST">

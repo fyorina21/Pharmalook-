@@ -24,7 +24,10 @@ def login():
             session['is_admin'] = True
 
             print("Admin logged in successfully")
-            return redirect(url_for("routes_bp.pharmacies"))
+            # return redirect(url_for("routes_bp.pharmacies"))
+            return redirect(url_for("routes_bp.accept_reject"))         
+            
+            
 
         user = Users.query.filter_by(email=email).first()
         if user and user.check_password(password):
@@ -45,7 +48,7 @@ def login():
         
             elif pharmacist.status == 'pending':
                 flash("Your pharmacy registration is still pending approval. Please wait.")
-                return redirect(url_for("routes_bp.status"))
+                return redirect(url_for("routes_bp.status_page"))
 
             elif pharmacist.admin_approved:
                 if pharmacist.status == 'pending':
