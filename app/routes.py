@@ -166,10 +166,10 @@ def view_pending():
 
 
 
-@routes_bp.route("/search<query>")
+@routes_bp.route("/search")
 def search():
     result=""
-    return render_template("search.html",result=result)
+    return render_template("look.html",result=result)
 
 @routes_bp.route("/pdashboard")
 def pdashboard():
