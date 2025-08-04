@@ -1,163 +1,165 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PharmaLook</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet" />
+</head>
 
-  <div class="welcome">
-    <header class="navbar">
+<body>
+
+  <!-- CONSTANT HEADER -->
+  <header class="navbar">
+    <div class="nav-container">
       <div class="logo">
-        <img src="static/images/pharmalook_logo-removebg-preview.png" alt="Pharmalook Logo">
-
       </div>
+    </nav>
+    <!--<img src="static/images/photo pharmalook_logo.png" class="logo-img" alt="pharmalook logo" />-->
+    <h1 class="logo-text">PharmaLook</h1>
       <div class="buttons">
         {% if session.get('id') %}
-        <a href="{{ url_for('auth_bp.logout') }}"><button class="nav-btn" id="loginBtn">Logout</button></a>
-        <h2>{{ session.get('username') }}</h2>
+          <a href="{{ url_for('auth_bp.logout') }}"><button class="nav-btn">Logout</button></a>
+          <span class="nav-username">{{ session.get('username') }}</span>
         {% else %}
-        <a href="{{ url_for('auth_bp.login') }}"><button class="nav-btn" id="loginBtn">Login</button></a>
-        <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="nav-btn" id="signupBtn">Sign up</button></a>
+          <a href="{{ url_for('auth_bp.login') }}"><button class="nav-btn">Login</button></a>
+          <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="nav-btn">Sign Up</button></a>
         {% endif %}
       </div>
-
-    </header>
-    <div class="hero-content">
-      <h1 class="well">Welcome to Pharmalook </h1>
-      <p class="part">
-        Convenient platform for finding medicines in nearby pharmacies in real-time.
-        Whether you’re looking for a specific prescription drug or an over-the-counter medication,
-        Pharmalook connects you to the closest pharmacy that has it in stock.
-      </p>
-      <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="search-btn">Start Searching Now</button></a>
     </div>
-    <!-- Include: welcome text + "Start Searching Now" button -->
+  </header>
+
+  <!-- HERO VIDEO SECTION -->
+  <div class="hero-video-container">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="{{ url_for('static', filename='videos/pharmacy-pg.mp4') }}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Only Search Bar over the video -->
+    <div class="hero-overlay">
+      <form class="search-bar">
+        <input type="text" placeholder="Search for a medicine..." name="query" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
   </div>
 
+  <!-- NEW WELCOME SECTION -->
+  <section class="welcome-section">
+    <div class="welcome-content">
+      <h1>Welcome to PharmaLook</h1>
+      <p>
+        Convenient platform for finding medicines in nearby pharmacies in real-time.
+        Whether you’re looking for a prescription or over-the-counter medication,
+        PharmaLook connects you to the closest pharmacy that has it in stock.
+      </p>
+      <a href="{{ url_for('routes_bp.who_are_you') }}">
+        <button class="search-btn">Start Searching Now</button>
+      </a>
+    </div>
+  </section>
 
-  <!-- PHARMACY LOGOS -->
-  <div class="logos">
-    <section id="logos">
-      <div id="logos">
-        <!-- <div class="spacer-box"></div> -->
+  <!-- ABOUT PHARMALOOK -->
+  <section class="about-section">
+    <div class="about-content">
+      <h1>About PharmaLook</h1>
+      <p>
+        At PharmaLook, we believe that access to healthcare should be quick, simple, and reliable.
+        That’s why we’ve built a powerful platform that allows users to locate prescription and 
+        over-the-counter medicines at nearby pharmacies in real time. Whether you're at home, on the road, 
+        or caring for a loved one, PharmaLook helps you avoid the hassle of pharmacy-hopping. 
+        <br><br>
+        Our mission is to connect people with pharmacies instantly, ensuring that no one has to wait or guess 
+        when it comes to essential medications. Backed by innovative technology and a user-friendly design, 
+        PharmaLook empowers communities with transparency in pricing, availability, and location data.
+        <br><br>
+        Whether you're a patient, a caregiver, or just someone trying to stay healthy — we're here for you.
+      </p>
+    </div>
+    <div class="about-gallery">
+      <img src="{{ url_for('static', filename='images/photo_2025-05-31_00-23-40-removebg-preview.png') }}" class="about-img" />
+      <img src="{{ url_for('static', filename='images/pharma-removebg-preview (1).png') }}" class="about-img" />
+      <img src="{{ url_for('static', filename='images/photo_2025-05-31_00-23-46-removebg-preview.png') }}" class="about-img" />
+      <img src="{{ url_for('static', filename='images/photo_2025-05-31_00-23-52-removebg-preview.png') }}" class="about-img" />
+      <img src="{{ url_for('static', filename='images/photo_2025-05-31_00-23-58-removebg-preview.png') }}" class="about-img" />
+      <img src="{{ url_for('static', filename='images/photo_2025-05-31_00-24-04-removebg-preview.png') }}" class="about-img" />
+    </div>
+  </section>
 
-        <h1>About Pharmalook</h1>
-        <p>Pharmalook revolutionizes yor healthcare experience by providing real-time updates on medicine availability.
-          Instantly locate the medications you need at nearby pharmacies, saving you time and ensuring your health is
-          never
-          compromised. With Pharmalook, acess to essential medicines is just a click away.
-        </p>
-        <div id="photo">
-          <img src="static/images/photo_2025-05-31_00-23-40-removebg-preview.png" width="150" height="100" class="img1">
-          <img src="static/images/pharma-removebg-preview (1).png" width="100" height="80">
-          <img src="static/images/photo_2025-05-31_00-23-46-removebg-preview.png" width="150">
-          <img src="static/images/photo_2025-05-31_00-23-52-removebg-preview.png" width="100" height="80">
-          <img src="static/images/photo_2025-05-31_00-23-58-removebg-preview.png" width="100" height="80">
-          <img src="static/images/photo_2025-05-31_00-24-04-removebg-preview.png" width="100" height="80">
-        </div>
-      </div>
-    </section>
-    <!-- Include: logos in grid/flex layout -->
-  </div>
-
-
-
+  <!-- FEATURES -->
   <div class="features-wrapper">
     <nav class="features-header">
-      <h2 style=" font-size: 25px;">Features</h2>
+      <h2 style="font-size: 25px;">Features</h2>
     </nav>
-
     <section class="features-section">
       <div class="feature-box">
-        <img src="static/images/drug.png" alt="Drugs" style="width: 40px;
-               height: 40px;
-               vertical-align: text-bottom;">
-        <span style="color: rgb(14, 127, 8);
-          font-size:23px;"> Real-Time Medicine <br> Availability <br><br>
-        </span>
-        <span>Easily check if the medicine you
-          need is in stock at nearby pharmacies.
-        </span>
-      </div>
-
-
-      <div class="feature-box">
-        <img src="static/images/best-price.png" alt="compare price icon" style="width: 40px;
-               height: 40px;
-              vertical-align: text-bottom;">
-
-        <span style="color: rgb(14, 127, 8); 
-         font-size:23px;"> Price Comparison <br><br>
-        </span>
-
-        <span>See prices from different pharmacies and
-          choose the most affordable
-          option.
-        </span>
+        <img src="{{ url_for('static', filename='images/drug.png') }}" alt="Drugs" style="width: 40px; height: 40px;" />
+        <span style="color: rgb(14, 127, 8); font-size:23px;">Real-Time Medicine<br>Availability<br><br></span>
+        <span>Easily check if the medicine you need is in stock at nearby pharmacies.</span>
       </div>
 
       <div class="feature-box">
-        <img src="static/images/location.png" alt="compare price icon" style="width: 40px;
-               height: 40px;
-               vertical-align: text-bottom;">
-        <span style="color: rgb(14, 127, 8); 
-         font-size:23px;"> Location-Based Search <br><br>
-        </span>
-
-        Quickly find the nearest pharmacy
-        carrying your medication.
+        <img src="{{ url_for('static', filename='images/best-price.png') }}" alt="Compare price icon" style="width: 40px; height: 40px;" />
+        <span style="color: rgb(14, 127, 8); font-size:23px;">Price Comparison<br><br></span>
+        <span>See prices from different pharmacies and choose the most affordable option.</span>
       </div>
 
+      <div class="feature-box">
+        <img src="{{ url_for('static', filename='images/location.png') }}" alt="Location icon" style="width: 40px; height: 40px;" />
+        <span style="color: rgb(14, 127, 8); font-size:23px;">Location-Based Search<br><br></span>
+        <span>Quickly find the nearest pharmacy carrying your medication.</span>
+      </div>
 
       <div class="feature-box">
-        <img src="static/images/back-in-time.png" alt="compare price icon" style="width: 40px;
-               height: 40px;
-               vertical-align: text-bottom;">
-
-        <span style="color: rgb(14, 127, 8); 
-         font-size: 23px;"> 24/7 Access <br><br>
-        </span>
-
-        Search for medicines anytime—day
-        or night—using your phone or computer.
+        <img src="{{ url_for('static', filename='images/back-in-time.png') }}" alt="24/7 icon" style="width: 40px; height: 40px;" />
+        <span style="color: rgb(14, 127, 8); font-size:23px;">24/7 Access<br><br></span>
+        <span>Search for medicines anytime—day or night—using your phone or computer.</span>
       </div>
 
       <div class="feature-box box-5">
-        <img src="static/images/network.png" alt="compare price icon" style="width: 40px;
-               height: 30px;
-              vertical-align: text-bottom;">
-
-        <span style="color: rgb(14, 127, 8); 
-         font-size: 23px;"> Simple & Fast Interface<br><br>
-        </span>
-
-        Enjoy a clean, user-friendly design
-        for smooth, quick searches
+        <img src="{{ url_for('static', filename='images/network.png') }}" alt="Fast UI" style="width: 40px; height: 30px;" />
+        <span style="color: rgb(14, 127, 8); font-size:23px;">Simple & Fast Interface<br><br></span>
+        <span>Enjoy a clean, user-friendly design for smooth, quick searches.</span>
       </div>
     </section>
   </div>
-  </div>
 
-
-  <!-- CTA  -->
+  <!-- CTA -->
   <div class="cta">
     <p>
-      Skip the stress of visiting multiple pharmacies. Just tell us what medicine you need and where you are-PharmaLook
+      Skip the stress of visiting multiple pharmacies. Just tell us what medicine you need and where you are – PharmaLook
       finds it for you in seconds.
     </p>
     <a href="{{ url_for('routes_bp.who_are_you') }}"><button class="gt-button">Get started</button></a>
   </div>
-
-
-  <!-- FAQ -->
+  <!-- ===== OFFICE LOCATION MAP SECTION ===== -->
+<section class="map-section">
+  <h2>Our Office Location</h2>
+  <div class="map-container">
+     <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.885021864359!2d38.79235787354892!3d8.982726689714584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b858bee74b995%3A0xcc85d2b9f8e3a54d!2sPharmacy!5e0!3m2!1sen!2set!4v1751916727236!5m2!1sen!2set"
+      width="100%" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+<!-- FAQ -->
   <div class="faq">
     <h1>FAQS</h1>
     <div class="faq-item">
       <div class="faq-question">
-        <span class="faq-text">How do i search for medicines?</span>
+        <span class="faq-text">How do I search for medicines?</span>
         <span class="faq-icon">˅</span>
       </div>
-      <div class="faq-answer">Simply type the name of the medicine in the search bar to see which pharmacies have it in
-        stock.</div>
+      <div class="faq-answer">Simply type the name of the medicine in the search bar to see which pharmacies have it in stock.</div>
     </div>
 
     <div class="faq-item">
@@ -165,66 +167,96 @@
         <span class="faq-text">How do I know the medicine is available at the pharmacy?</span>
         <span class="faq-icon">˅</span>
       </div>
-      <div class="faq-answer">Pharmalook provides real-time information on medicine availability from local pharmacies.
-      </div>
+      <div class="faq-answer">Pharmalook provides real-time information on medicine availability from local pharmacies.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">
-        <span class="faq-text">Can i compare prices for the same medicine?</span>
+        <span class="faq-text">Can I compare prices for the same medicine?</span>
         <span class="faq-icon">˅</span>
       </div>
       <div class="faq-answer">Yes, you can compare prices from different pharmacies to find the best deal.</div>
     </div>
   </div>
 
-  <!-- Outro -->
+  <!-- OUTRO -->
   <div class="outro">
     <p>
-      We're here to help! If you have any questions, feedback, or need assistance using Pharmalook, feel free to reach
-      out to us.
+      We're here to help! If you have any questions, feedback, or need assistance using Pharmalook, feel free to reach out to us.
     </p>
   </div>
 
-
-  <!-- CONTACT US -->
-  <footer class="footer-container">
-    <div class="logo-container">
-      <img src="static/images/logo bg.png" class="pharma-logo" alt="Pharmalook logo">
+  <!-- FOOTER -->
+<footer class="footer-container">
+  <div class="footer-content">
+    
+    <!-- Middle Section: Contact Information -->
+    <div class="footer-middle">
+      <h3>Contact Information</h3>
+      <p><strong>Address:</strong><br>
+        📍 Pharmalook Headquarters<br>
+        Bole, Addis Ababa, Ethiopia
+      </p>
+      <p><strong>Email:</strong><br>
+        <a href="mailto:hanania.meseret@bitscollege.edu.et">hanania.meseret@bitscollege.edu.et</a>
+      </p>
+      <p><strong>Phone:</strong><br>
+        <a href="tel:+2510947400179">+251-9-474-001-79</a>
+      </p>
     </div>
 
-    <div class="footer-right-section">
-      <!--<h2 class="footer-heading">Contact Info</h2>-->
-      <div class="footer-details">
-        <div class="address">
-          <p>📍 Office Address<br>
-            Pharmalook Headquarters<br>
-            Bole, Addis Ababa, Ethiopia</p>
-        </div>
-
-        <div class="socials">
-          <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">LinkedIn</a></li>
-          </ul>
-        </div>
-
-        <div class="contact-info">
-          <p><strong>Email</strong><br>
-            <a href="mailto:hanania.meseret@bitscollege.edu.et">hanania.meseret@bitscollege.edu.et</a>
-          </p>
-          <p><strong>Phone</strong><br>
-            <a href="tel:+2510947400179">+251-09-474-001-79</a>
-          </p>
-        </div>
-      </div>
+    <!-- Right Section: Social Links -->
+    <div class="footer-right">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
     </div>
-  </footer>
+
+    <!-- Contact Us Section -->
+    <div class="footer-contact-us">
+      <h3>Contact Us</h3>
+      <form action="/send-message" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</footer>
 
 
-  <script src="static/images/script.js"></script>
 
 
-{% endblock %}
+  <script src="{{ url_for('static', filename='images/script.js') }}"></script>
+  <!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Login</h2>
+    <p>Welcome back! Please login to your account.</p>
+    
+    <form action="/login" method="POST">
+      <label for="email">Email/Phone</label>
+      <input type="text" id="email" name="email" required>
+
+      <label for="password">Password 
+        <a href="/forgot-password" style="float: right; color: blue;">Forgot your Password?</a>
+      </label>
+      <input type="password" id="password" name="password" required>
+
+      <label><input type="checkbox" name="remember"> Remember me</label>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+  </div>
+</div>
+
+</body>
+</html>
